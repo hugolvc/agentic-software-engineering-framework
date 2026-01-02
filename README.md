@@ -6,7 +6,7 @@ The **Agent Based Software Engineering Process** is a comprehensive methodology 
 
 ## Purpose
 
-This methodology is founded on structured documentation, guidelines, and procedures contained within this project. These assets are specifically designed to be utilized by LLM agents for planning, executing, and managing Software Engineering tasks. The documentation serves as a standardized framework that enables agents to:
+This methodology is founded on structured documentation, guidelines, and procedures contained within this project. These assets are specifically designed to be utilized by LLM agents as part of their context when carrying on Software Engineering tasks. The documentation serves as a standardized framework and contextual reference that enables agents to:
 
 - Understand project requirements and constraints
 - Plan development activities systematically
@@ -41,4 +41,6 @@ The documentation contained in this project is organized into the following key 
 
 ## Usage
 
-This repository contains the essential assets and documentation required to implement the Agent Based Software Engineering Process. LLM agents should reference these guidelines and procedures when engaging in software engineering activities to ensure consistent, predictable, and accurate project execution.
+This repository contains the essential assets and documentation required to implement the Agent Based Software Engineering Process. **This documentation is intended to be used by LLM agents as part of their context** when carrying on Software Engineering tasks. LLM agents should incorporate these guidelines and procedures into their working context when engaging in software engineering activities to ensure consistent, predictable, and accurate project execution.
+
+The documentation should be provided to LLM agents as contextual information at the beginning of Software Engineering projects and referenced throughout the project lifecycle to maintain adherence to the established methodology and standards.
