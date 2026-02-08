@@ -81,12 +81,12 @@ Establish relationships:
 
 ```markdown
 **Use Case ID**: [UC-XXX]
-**Use Case Name**: [Descriptive Name]
-**Version**: [Version number]
-**Status**: [Draft/Approved/Implemented]
-
-**Description**: 
-[Brief description of what the use case accomplishes]
+**Use Case**: [UC-001] [Use Case Name]
+**Actor**: [Actor Name]
+**Goal**: [What the actor wants to achieve]
+**Complexity**: [Simple/Average/Complex] (See 05_01_software_sizing_description.md)
+**Size**: [5/10/15] UCP
+**Description**: [Brief description of what the use case accomplishes]
 
 **Primary Actor**: 
 [Actor ID and Name]

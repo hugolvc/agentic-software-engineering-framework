@@ -40,6 +40,7 @@ The Process Workflow document serves to:
 │  - Document Technology Stack (03_06_technology_stack...)        │
 │  - Document NFRs (03_07_non_functional_requirements...)         │
 │  - Document UI Guidelines (03_05_ui_styling_guidelines.md)       │
+│  - Perform Software Sizing (05_01_software_sizing_description.md) │
 └────────────────────────────┬────────────────────────────────────┘
                              │
                              ▼
@@ -232,6 +233,12 @@ The Process Workflow document serves to:
    - Extract functional requirements from use cases
    - Link to use cases and actors
    - Document in functional requirements register
+
+
+4. **Software Sizing** (`05_01_software_sizing_description.md`)
+   - Classify Use Cases by complexity
+   - Calculate total Use Case Points (UCP)
+   - Estimate effort in Agent Steps and Tokens
 
 ### Phase 3: Initial Change and Implementation
 

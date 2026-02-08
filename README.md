@@ -58,6 +58,11 @@ The documentation contained in this project is organized into the following key 
    - Version control and traceability procedures
    - Impact analysis and change implementation workflows
 
+5. **Software Sizing (Use Case Points)**
+    - Methodology for estimating effort using Agent Use Case Points (A-UCP)
+    - Guidelines for complexity classification and effort conversion
+    - Integration with Use Case Register
+
 ## Usage
 
 This repository contains the essential assets and documentation required to implement the Agent Based Software Engineering Process. **This documentation is intended to be used by LLM agents as part of their context** when carrying on Software Engineering tasks. LLM agents should incorporate these guidelines and procedures into their working context when engaging in software engineering activities to ensure consistent, predictable, and accurate project execution.
