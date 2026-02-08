@@ -40,6 +40,14 @@ All Implementation Plans must include a Code Entropy analysis section that addre
 - Treat configuration, flags, and static data as metadata that can be reloaded or adjusted without changing code.
 - Whenever practical, move data and configuration into metadata structures (files, tables, documents) so behavior can evolve with minimal code changes and lower entropy.
 
+
+### Metadata-Driven UI Architecture
+> "UI is configuration, not code."
+
+- **Decouple Styling**: All visual styling (colors, fonts, spacing) MUST be loaded from external configuration (Design Tokens/Theme Objects). hardcoding styles in components is forbidden.
+- **Decouple Navigation**: functionality flows and screen transitions MUST be defined in a metadata structure (Router Configuration, State Machine definition) rather than hardcoded `if/else` redirection logic.
+- **Benefits**: This allows the UI "skin" and "flow" to change without recompiling or refactoring the core logic, significantly reducing entropy for cosmetic and flow changes.
+
 ## UML Design Patterns
 
 All modules and components must be implemented using appropriate UML Design Patterns. The pattern selection must be justified by answering the following questions:

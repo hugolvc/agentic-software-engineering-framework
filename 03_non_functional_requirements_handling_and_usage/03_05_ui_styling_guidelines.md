@@ -129,6 +129,11 @@ The UI Styling and Guidelines documentation should be organized into the followi
 [Additional information]
 ```
 
+
+### Implementation Mandate: Metadata Theme Object
+All design tokens must be implemented as a loadable **Metadata Theme Object** (JSON/YAML/Config).
+Components must reference tokens via this object (e.g., `Theme.Colors.Primary`), NEVER hardcoded values.
+
 ### Color Category Usage Guidelines
 
 #### Primary Color
@@ -631,9 +636,99 @@ When documenting UI in the context of code entropy:
 
 [Layout pattern entries using template]
 
+## UI Navigation Modeling (Mermaid)
+
+To ensure clear communication of user flows and navigation requirements between the User and AI Agents, we adopt **Mermaid.js State Diagrams** as the standard notation.
+
+### Implementation Mandate: Router Configuration
+The Mermaid diagram above represents a **Router Configuration** (Metadata).
+Navigation logic in code must execute this configuration (e.g., a State Machine or Router definition file), not hardcoded path strings.
+
+### Navigation Diagram Template
+
+```mermaid
+stateDiagram-v2
+    [*] --> [StartScreen]
+    
+    [StartScreen] --> [NextScreen]: [Action/Trigger]
+    [StartScreen] --> [AlternativeScreen]: [Alternative Condition]
+    
+    state [ScreenName] {
+        [*] --> [DefaultState]
+        [DefaultState] --> [OtherState]: [Internal Interaction]
+    }
+```
+
+**Key Elements:**
+*   `[*]` : Entry/Exit points
+*   `-->`: Transitions
+*   `:` : Label for Trigger/Action (e.g., "Click Save", "Success")
+
+## UI Screen Specification
+
+For specifying detailed screen requirements, use the following textual wireframing notation.
+
+### Textual Wireframing Syntax
+
+*   **Containers**:
+    *   `[Screen Name]` : Screen Title/Page
+    *   `+--- [Section Name] ---+` : Section Divider
+*   **Interactive Elements**:
+    *   `[ Button Label ]` : Button
+    *   `{ Input Label }` : Text Input Field
+    *   `( ) Radio` : Radio Button (Unselected)
+    *   `(*) Radio` : Radio Button (Selected)
+    *   `[ ] Checkbox` : Checkbox (Unchecked)
+    *   `[x] Checkbox` : Checkbox (Checked)
+    *   `v Dropdown v` : Dropdown Menu
+*   **Navigation**:
+    *   `| Link Label |` : Hyperlink
+
+### Screen Specification Template
+
+```markdown
+**Screen ID**: [SCR-XXX]
+**Screen Name**: [Name]
+**Route**: [/path/to/screen]
+
+**Wireframe**:
+```text
++-------------------------------------------------------+
+|  [Screen Name]                                        |
++-------------------------------------------------------+
+|  { Search... }          [ Search ]                    |
+|                                                       |
+|  +--- User List ----------------------------------+   |
+|  | Name            | Role          | Actions      |   |
+|  |-----------------|---------------|--------------|   |
+|  | User A          | Admin         | [Edit] [Del] |   |
+|  | User B          | Viewer        | [Edit] [Del] |   |
+|  +------------------------------------------------+   |
+|                                                       |
+|  [ < Prev ]   Page 1 of 5   [ Next > ]                |
++-------------------------------------------------------+
+```
+
+**Data Binding**:
+*   `{Search}` -> `SearchQuery` (String)
+*   `User List` -> `Users` (List<User>)
+
+**Interactions**:
+*   `[Search]` -> Triggers `SearchUsers()` -> Updates `User List`
+*   `[Edit]` -> Navigates to `SCR-002` (Edit User)
+```
+
 ## Interaction Patterns
 
 [Interaction pattern entries using template]
+
+## UI Navigation
+
+[Mermaid Navigation Diagrams]
+
+## Screen Specifications
+
+[Screen Specification entries using template]
 
 ## Accessibility Guidelines
 
@@ -655,6 +750,34 @@ When documenting UI in the context of code entropy:
 |------|-------------|-------------------|-------------|-----------|
 | [Date] | [Added/Updated/Removed] | [ID] | [Description] | [Rationale] |
 ```
+
+
+## Generative Design Workflow
+
+This methodology leverages AI agents to generate visual concepts and detailed specifications in a two-phase process.
+
+### Phase 1: Generative Styling (Visual Identity)
+**Timing**: Before `Actors Identification`.
+**Goal**: Define the visual "Look & Feel" (Theme).
+
+**Agent Workflow**:
+1.  **Context**: Read the User's high-level project description/idea.
+2.  **Action**: Generate 2 distinct "Mood Board" or "Home Screen Concept" images (e.g., one "Modern/Clean", one "Bold/Creative").
+    *   *Prompt Pattern*: "Generate a high-fidelity UI concept for [App Name] with a [Style] aesthetic. Show a Dashboard screen. [Light/Dark] mode."
+3.  **User Interaction**: Ask user to select the preferred concept.
+4.  **Output**: Create the **Metadata Theme Object** (JSON) based on the selected image's colors, typography, and spacing.
+
+### Phase 2: Generative Interaction (Detailed Design)
+**Timing**: After `Functional Requirements` and `Software Sizing`.
+**Goal**: Design specific screens and navigation flows.
+
+**Agent Workflow**:
+1.  **Context**: Read `Theme Object`, `Use Cases`, and `Functional Requirements`.
+2.  **Action**: For each major Use Case, generate a "Screen Mockup" image applying the Theme.
+3.  **Derivation**:
+    *   Convert Mockup -> **Screen Specification** (Textual Wireframe).
+    *   Convert Flow -> **Router Configuration** (Mermaid).
+4.  **Output**: Update the UI Guidelines Register with these specifications.
 
 ## Integration with AI Agent Context
 

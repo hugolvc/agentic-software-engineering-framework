@@ -34,13 +34,16 @@ The Process Workflow document serves to:
                              ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │              INITIAL REQUIREMENTS ANALYSIS                       │
-│  - Identify Actors (02_02_actors_identification_description.md)│
+│  - Define Visual Identity (03_05_ui_styling_guidelines.md)       │
+│  - Identify Actors (02_02_actors_identification_description.md)  │
 │  - Identify Use Cases (02_03_use_cases_identification...)       │
 │  - Identify Functional Requirements (02_04_functional...)       │
 │  - Document Technology Stack (03_06_technology_stack...)        │
 │  - Document NFRs (03_07_non_functional_requirements...)         │
 │  - Document UI Guidelines (03_05_ui_styling_guidelines.md)       │
 │  - Perform Software Sizing (05_01_software_sizing_description.md) │
+│  - Detail UI Design (03_05_ui_styling_guidelines.md)             │
+│  - Document UI Guidelines (Legacy Ref)                            │
 └────────────────────────────┬────────────────────────────────────┘
                              │
                              ▼
@@ -220,7 +223,12 @@ The Process Workflow document serves to:
 
 ### Phase 2: Initial Requirements Documentation
 
-1. **Actors Identification** (`02_02_actors_identification_description.md`)
+1. **Visual Identity Definition** (`03_05_ui_styling_guidelines.md`)
+   - Generate Style Concepts (Phase 1)
+   - Select Preferred Concept
+   - Creates Theme Metadata
+
+2. **Actors Identification** (`02_02_actors_identification_description.md`)
    - Identify all actors (human and non-human)
    - Document in actors register
 
@@ -239,6 +247,11 @@ The Process Workflow document serves to:
    - Classify Use Cases by complexity
    - Calculate total Use Case Points (UCP)
    - Estimate effort in Agent Steps and Tokens
+
+5. **Detailed UI Design** (`03_05_ui_styling_guidelines.md`)
+   - Generate Screen Mockups (Phase 2)
+   - Creates Screen Specifications
+   - Creates Navigation Metadata
 
 ### Phase 3: Initial Change and Implementation
 
