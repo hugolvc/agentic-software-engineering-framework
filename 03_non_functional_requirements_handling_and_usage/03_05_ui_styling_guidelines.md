@@ -765,6 +765,18 @@ This methodology leverages AI agents to generate visual concepts and detailed sp
 2.  **Action**: Generate 2 distinct "Mood Board" or "Home Screen Concept" images (e.g., one "Modern/Clean", one "Bold/Creative").
     *   *Prompt Pattern*: "Generate a high-fidelity UI concept for [App Name] with a [Style] aesthetic. Show a Dashboard screen. [Light/Dark] mode."
 3.  **User Interaction**: Ask user to select the preferred concept.
+
+    **Look Principles (Style Selection)**:
+    When generating concepts, the Agent handles the look and feel based on the product characteristics and market. The Agent MUST select from the following 5 "Look Principles":
+    
+    *   **Minimalistic**: For emotionally neutral apps that promote concentration and task focus (e.g., Productivity, SaaS).
+    *   **Neon**: For modern, goal-oriented, and high-energy moods (e.g., Fitness, Gaming, Crypto).
+    *   **Fiesta**: For excitement, emotion, and celebration (e.g., Events, Social functionality).
+    *   **Classic**: For formal, confidence, and trust moods (e.g., Banking, Legal, Enterprise).
+    *   **Feminine**: For social, soft, and emotional moods (e.g., Lifestyle, Wellness).
+
+    *Agent Instruction*: Generate one visual concept for EACH of the 5 Look Principles to provide the user with a comprehensive range of stylistic options.
+
 4.  **Output**: Create the **Metadata Theme Object** (JSON) based on the selected image's colors, typography, and spacing.
 
 ### Phase 2: Generative Interaction (Detailed Design)
@@ -778,6 +790,152 @@ This methodology leverages AI agents to generate visual concepts and detailed sp
     *   Convert Mockup -> **Screen Specification** (Textual Wireframe).
     *   Convert Flow -> **Router Configuration** (Mermaid).
 4.  **Output**: Update the UI Guidelines Register with these specifications.
+
+4.  **Output**: Update the UI Guidelines Register with these specifications.
+
+### Style Implementation Recipes (Technical Feasibility)
+
+When selecting or implementing a visual style, use the following technical recipes. Most modern effects are achievable with **Pure CSS** and do not require image assets.
+
+| Style | CSS-Only? | Key CSS Properties | Implementation Difficulty |
+| :--- | :--- | :--- | :--- |
+| **Neumorphism** | ✅ Yes | `box-shadow` (multiple: light & dark), `background-color` (precise matching), `border-radius` | Medium (Requires precise color tuning) |
+| **Glassmorphism** | ✅ Yes | `backdrop-filter: blur()`, `background: rgba(255,255,255, x)`, `border` (semi-transparent) | Low (Browser support is good) |
+| **Claymorphism** | ✅ Yes | `box-shadow: inset` (inner glow/shadow), `border-radius` (high), `filter: drop-shadow` | Low |
+| **Aurora UI** | ✅ Yes | `background-image: radial-gradient()`, `filter: blur()`, `position: absolute` (for blobs) | Medium (Performance consideration for animations) |
+| **Neo-Brutalism** | ✅ Yes | `border: xpx solid black`, `box-shadow` (0 blur, hard offset), `font-weight: bold` | Very Low |
+
+#### 1. Neumorphism Recipe
+*   **Concept**: Elements appear extruded from the background (same color).
+*   **Requirement**: Background and Element color must match exactly.
+*   **Code**:
+    ```css
+    .neumorphic {
+      background: #e0e0e0;
+      box-shadow:  20px 20px 60px #bebebe, 
+                  -20px -20px 60px #ffffff;
+    }
+    ```
+
+#### 2. Glassmorphism Recipe
+*   **Concept**: Frosted glass effect overlaying a background.
+*   **Requirement**: Needs something behind it to blur.
+*   **Code**:
+    ```css
+    .glass {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    ```
+
+#### 3. Claymorphism Recipe
+*   **Concept**: Soft, 3D, inflated "clay" look.
+*   **Requirement**: Light "inset" shadows and high border-radius.
+*   **Code**:
+    ```css
+    .clay {
+      background: #ebf5fc;
+      border-radius: 32px;
+      box-shadow: inset 8px 8px 16px 0px rgba(255, 255, 255, 0.6), 
+                  inset -8px -8px 16px 0px rgba(0, 0, 0, 0.1),
+                  10px 10px 20px rgba(0,0,0,0.1);
+    }
+    ```
+
+#### 4. Aurora UI Recipe
+*   **Concept**: Soft, blurred, moving gradients (like Northern Lights).
+*   **Requirement**: Overlapping blurred distinct gradient shapes.
+*   **Code**:
+    ```css
+    .aurora-bg {
+      background-color: #ffffff;
+      background-image: 
+        radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+      filter: blur(100px); /* The key to the effect */
+    }
+    ```
+
+#### 5. Neo-Brutalism Recipe
+*   **Concept**: Raw, unpolished, high contrast, non-conformist.
+*   **Requirement**: Thick borders, hard shadows, vibrant/clashing colors.
+*   **Code**:
+    ```css
+    .neo-brutal {
+      background-color: #FF90E8;
+      border: 3px solid #000000;
+      box-shadow: 5px 5px 0px 0px #000000; /* No blur, solid offset */
+    }
+    ```
+
+    ```
+
+#### 6. Retro / ASCII (VGA) Recipe
+*   **Concept**: Mimic old-school terminal interfaces.
+*   **Requirement**: Monospace font is mandatory. Borders must be solid or double.
+*   **Code**:
+    ```css
+    .retro-ascii {
+      font-family: 'Courier New', monospace;
+      background-color: #000084; /* VGA Blue */
+      color: #FFFFFF;
+      border: 4px double #FFFFFF; /* Mimics ASCII double lines */
+      box-shadow: 10px 10px 0px #000000; /* Hard shadow */
+      text-transform: uppercase;
+    }
+    /* CRT Scanline Overlay Effect (Optional) */
+    .crt-overlay {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 4px;
+      pointer-events: none;
+    }
+    ```
+
+#### 7. Windows 3.11 (Retro GUI) Recipe
+*   **Concept**: Classic 16-bit graphical user interface.
+*   **Requirement**: MS Sans Serif font (pixelated), "Chiseled" 3D borders, specific gray.
+*   **Code**:
+    ```css
+    .win31 {
+      font-family: 'MS Sans Serif', 'Pixel Sans', sans-serif;
+      background-color: #C0C0C0; /* Classic Gray */
+      color: #000000;
+      border: 2px solid #FFFFFF; /* High-light */
+      border-right-color: #000000; /* Shadow */
+      border-bottom-color: #000000; /* Shadow */
+      box-shadow: 1px 1px 0px #808080; /* Dark Gray Shadow */
+    }
+    .win31-title-bar {
+      background-color: #000080; /* Navy Blue */
+      color: #FFFFFF;
+      font-weight: bold;
+    }
+    ```
+
+### Dynamic Theming & Skinning Architecture
+
+The **Metadata-Driven UI** architecture explicitly supports "Skinning" (runtime style switching).
+
+**Mechanism**:
+1.  **Abstraction**: Components do not have hardcoded styles. They reference **Semantic Tokens** (e.g., `var(--card-bg)`, `var(--shadow-elevation)`).
+2.  **Definition**: The "Skin" is defined entirely within the **Theme Metadata Object** (JSON).
+3.  **Switching**: Changing the active "Skin" is as simple as injecting a new JSON object into the Theme Provider.
+
+**Example: Switching from Minimal to Neumorphic**
+
+*   **Minimal Theme JSON**:
+    ```json
+    { "shadows": { "card": "0 2px 4px rgba(0,0,0,0.1)" }, "borderRadius": "8px", "bg": "#ffffff" }
+    ```
+*   **Neumorphic Theme JSON**:
+    ```json
+    { "shadows": { "card": "20px 20px 60px #bebebe, -20px -20px 60px #ffffff" }, "borderRadius": "30px", "bg": "#e0e0e0" }
+    ```
+
+**Result**: The *same* `<Card />` component renders completely differently based on the loaded JSON, without changing a single line of component code.
 
 ## Integration with AI Agent Context
 
