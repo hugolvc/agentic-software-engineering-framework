@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphism Profile Mockup</title>
+    <style>
+        :root {
+            --primary-color: #007BFF;
+            --action-color: #ff9800;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        /* Ambient colored orbs for background */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary-color);
+            top: -100px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--action-color);
+            bottom: -50px;
+            right: -50px;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 1000px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 25px;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 25px;
+            color: white;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .glass-card:hover {
+            /* Hover effect */
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Sidebar Styles */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 15px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Buttons */
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.8), rgba(0, 86, 179, 0.8));
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.8), rgba(255, 87, 34, 0.8));
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .glass-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            outline: none;
+        }
+
+        /* Checkbox/Radio */
+        .control-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .glass-check {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .glass-check:checked {
+            background: var(--primary-color);
+        }
+
+        .glass-radio {
+            border-radius: 50%;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Chart */
+        .chart-box {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 150px;
+            padding-top: 20px;
+            gap: 10px;
+        }
+
+        .chart-col {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+        }
+
+        .chart-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: var(--primary-color);
+            border-radius: 5px 5px 0 0;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="glass-panel">
+            <div class="profile-section">
+                <div class="avatar">👩‍💻</div>
+                <h3>Alice Glass</h3>
+                <p style="color: rgba(255,255,255,0.7); font-size: 14px;">Frontend Dev</p>
+                <button class="btn btn-action" style="width: 100%; margin-top: 15px;">Edit Profile</button>
+            </div>
+
+            <nav>
+                <a href="#" class="nav-link active">Dashboard</a>
+                <a href="#" class="nav-link">Projects</a>
+                <a href="#" class="nav-link">Settings</a>
+            </nav>
+
+            <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <label style="font-size: 12px; color: rgba(255,255,255,0.6);">NOTIFICATIONS</label>
+                <div class="control-group">
+                    <input type="checkbox" class="glass-check" checked> <span>Email</span>
+                </div>
+                <div class="control-group">
+                    <input type="checkbox" class="glass-check"> <span>Push</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="glass-panel">
+            <!-- Form Section -->
+            <div class="glass-card">
+                <h2 style="margin-top: 0;">Update Info</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="glass-input" value="alice_g">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="glass-input" value="alice@glass.ui">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Visibility</label>
+                    <div class="control-group">
+                        <input type="radio" name="vis" class="glass-check glass-radio" checked> <span>Public</span>
+                        <input type="radio" name="vis" class="glass-check glass-radio"> <span>Private</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-primary">Save Changes</button>
+                    <button class="btn" style="margin-left: 10px;">Cancel</button>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <!-- Chart Section -->
+                <div class="glass-card">
+                    <h3 style="margin-top: 0; font-size: 16px;">Activity</h3>
+                    <div class="chart-box">
+                        <div class="chart-col" style="height: 100%">
+                            <div class="chart-fill" style="height: 40%"></div>
+                        </div>
+                        <div class="chart-col" style="height: 100%">
+                            <div class="chart-fill" style="height: 70%"></div>
+                        </div>
+                        <div class="chart-col" style="height: 100%">
+                            <div class="chart-fill" style="height: 50%"></div>
+                        </div>
+                        <div class="chart-col" style="height: 100%">
+                            <div class="chart-fill" style="height: 90%"></div>
+                        </div>
+                        <div class="chart-col" style="height: 100%">
+                            <div class="chart-fill" style="height: 30%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- List/Table Section -->
+                <div class="glass-card">
+                    <h3 style="margin-top: 0; font-size: 16px;">Recent Files</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>index.html</td>
+                                <td>2kb</td>
+                            </tr>
+                            <tr>
+                                <td>style.css</td>
+                                <td>5kb</td>
+                            </tr>
+                            <tr>
+                                <td>script.js</td>
+                                <td>12kb</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

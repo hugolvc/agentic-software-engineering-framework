@@ -762,22 +762,26 @@ This methodology leverages AI agents to generate visual concepts and detailed sp
 
 **Agent Workflow**:
 1.  **Context**: Read the User's high-level project description/idea.
-2.  **Action**: Generate 2 distinct "Mood Board" or "Home Screen Concept" images (e.g., one "Modern/Clean", one "Bold/Creative").
+2.  **Action**: Generate 2 distinct "Mood Board" or "Home Screen Concept" HTML mockups (e.g., one "Modern/Clean", one "Bold/Creative").
     *   *Prompt Pattern*: "Generate a high-fidelity UI concept for [App Name] with a [Style] aesthetic. Show a Dashboard screen. [Light/Dark] mode."
 3.  **User Interaction**: Ask user to select the preferred concept.
 
     **Look Principles (Style Selection)**:
-    When generating concepts, the Agent handles the look and feel based on the product characteristics and market. The Agent MUST select from the following 5 "Look Principles":
-    
-    *   **Minimalistic**: For emotionally neutral apps that promote concentration and task focus (e.g., Productivity, SaaS).
-    *   **Neon**: For modern, goal-oriented, and high-energy moods (e.g., Fitness, Gaming, Crypto).
-    *   **Fiesta**: For excitement, emotion, and celebration (e.g., Events, Social functionality).
-    *   **Classic**: For formal, confidence, and trust moods (e.g., Banking, Legal, Enterprise).
-    *   **Feminine**: For social, soft, and emotional moods (e.g., Lifestyle, Wellness).
+    When generating concepts, the Agent handles the look and feel based on the product characteristics and market. The Agent MUST select from the **Style Implementation Recipes** defined in this document (e.g., Minimalistic, Neumorphism, Glassmorphism, Claymorphism, Aurora UI, Neo-Brutalism, Retro/ASCII, Windows 3.11).
 
-    *Agent Instruction*: Generate one visual concept for EACH of the 5 Look Principles to provide the user with a comprehensive range of stylistic options.
+    *   **Standard**: Simplicity focused but with strong branding elements. Uses primary brand colors for headers/navigation and logos to establish identity. A balanced, accessible corporate look.
+    *   **Minimalistic**: Clean, well-ordered, visually pleasant appearance. No heavy effects, focus on typography, whitespace, and subtle borders. Uses theme colors (Blue/Orange) sparingly for emphasis and actions.
 
-4.  **Output**: Create the **Metadata Theme Object** (JSON) based on the selected image's colors, typography, and spacing.
+    *Agent Instruction*: Generate one visual concept for EACH of the available Style Implementation Recipes to provide the user with a comprehensive range of stylistic options. Each mockup must include the following elements to demonstrate the style's capability:
+    1.  **Context**: Profile-like page.
+    2.  **Identity**: User Avatar.
+    3.  **Controls**: Form with a set of primary buttons and one action button.
+    4.  **Selection**: A set of radio buttons and a set of checkboxes.
+    5.  **Layout**: A list of cards.
+    6.  **Data**: A data table.
+    7.  **Visualization**: A chart (CSS-based or SVG).
+
+4.  **Output**: Create the **Metadata Theme Object** (JSON) based on the selected HTML mockup's colors, typography, and spacing.
 
 ### Phase 2: Generative Interaction (Detailed Design)
 **Timing**: After `Functional Requirements` and `Software Sizing`.
@@ -785,7 +789,7 @@ This methodology leverages AI agents to generate visual concepts and detailed sp
 
 **Agent Workflow**:
 1.  **Context**: Read `Theme Object`, `Use Cases`, and `Functional Requirements`.
-2.  **Action**: For each major Use Case, generate a "Screen Mockup" image applying the Theme.
+2.  **Action**: For each major Use Case, generate a "Screen Mockup" HTML mockup applying the Theme.
 3.  **Derivation**:
     *   Convert Mockup -> **Screen Specification** (Textual Wireframe).
     *   Convert Flow -> **Router Configuration** (Mermaid).
