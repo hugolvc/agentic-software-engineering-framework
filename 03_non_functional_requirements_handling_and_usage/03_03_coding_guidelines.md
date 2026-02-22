@@ -1,110 +1,88 @@
-All module and component implementations must be based on an Implementation Plan that addresses the following guidelines for code design and structure. The Implementation Plan serves as both a design document and a tool for testing Code Entropy concepts (see [CODE_ENTROPY.md](CODE_ENTROPY.md)).
+# 📐 System Context: Coding Guidelines
 
-## Code Entropy Analysis
+## 🤖 Core Operational Directives (Zero-Shot)
+**As an autonomous AI software engineer, you must adhere to these strict coding standards when generating or modifying code.**
+Do not generate code that violates these rules, even if it seems faster. These guidelines exist to minimize Code Entropy and make the software durable for future AI iterations.
 
-All Implementation Plans must include a Code Entropy analysis section that addresses:
+**Constraints:**
+1.  **Single Responsibility:** Every function must do exactly one thing. If you find yourself using "and" or "then" to describe what a function does, you must split it.
+2.  **Metadata Over Code:** Do not hardcode configuration, stylistic tokens, or navigational states into logical components. Use metadata (e.g., config files, DB tables, or constants).
+3.  **Pattern Enforcement:** You must explicitly declare which UML Design Pattern you are using in your Implementation Plan.
 
-1. **Domain Mapping:** Clearly identify whether the module/component belongs to the Technology Domain or Problem Domain, and justify the classification.
+---
 
-2. **Expected Changes:** Document the types of changes most likely to affect this module/component:
-   - What Function Points or Use Cases might trigger changes?
-   - What are the predicted change patterns?
-   - How frequently are these changes expected?
+## 🧠 Chain-of-Thought (CoT): Code Generation Sub-Routine
+When writing an Implementation Plan or generating the actual code, you must execute the following thought process to validate your technical approach:
 
-3. **Entropy Prediction:** Estimate the entropy for expected changes:
-   - How many components are likely to be affected by typical changes?
-   - At what level will changes occur (architectural, module, component, sub-component)?
-   - What is the target entropy for this module/component?
+```text
+<coding_guidelines_thought>
+1. DOMAIN CHECK: Am I mixing the Technology Domain (e.g., SQL/HTTP) with the Problem Domain (e.g., Business Logic)? 
+   - If YES -> Separate them immediately into different layers (e.g., Service vs. Repository).
+2. HARDCODING CHECK: Am I hardcoding a color, a UI string, or a routing path directly inside a UI component?
+   - If YES -> Move it to a metadata dictionary/configuration file. (UI is configuration, not code).
+3. PATTERN CHECK: What UML pattern justifies this file structure? (e.g., "I am using the Strategy pattern because this payment algorithm will change frequently").
+4. DOCSTRING CHECK: Did I write an inline docstring for this function? Does the docstring explain the *business process* and the *domain classification*?
+</coding_guidelines_thought>
+```
 
-4. **Component Organization Justification:** Explain how the chosen organization minimizes entropy for predicted changes while maintaining clear domain representation.
+---
 
-5. **Change Tracking:** After implementation, track actual changes:
-   - Record each change (Function Point or Use Case Point)
-   - Document the number of components modified
-   - Note the types and levels of components modified
-   - Compare actual entropy to predicted entropy
+## 📝 Few-Shot: Documentation & Coding Examples
 
-## Clean Code Guidelines
+### 1. Function Splitting & Docstrings
+**❌ BAD (High Entropy, Mixed Responsibilities):**
+```python
+def process_user_and_send_email(user_data):
+    # Validates user, saves to DB, then sends an email.
+    if not user_data.get("email"): return False
+    db.save(user_data)
+    smtp.send("Welcome!")
+```
 
-### Unitary Functions
-> "Functions should do one thing. They should do it well. They should do it only."  
-> — Robert C. Martin, *Clean Code*, Chapter 3 ("Functions – Do One Thing")
+**✅ GOOD (Single Responsibility, Proper Docstrings):**
+```python
+def validate_user(user_data: dict) -> bool:
+    """
+    Domain: Problem Domain
+    Business Process: User Registration
+    Pattern: Validator
+    Validates that a user payload contains all required fields.
+    """
+    return bool(user_data.get("email"))
 
-- Every method or function must have a single, well-defined responsibility.
-- If a function name requires "and" or "then" to describe its behavior, split it into smaller functions until each does exactly one task.
+def save_user(user_data: dict) -> None:
+    """
+    Domain: Technology Domain
+    Business Process: User Registration
+    Pattern: Repository
+    Persists user data to the database.
+    """
+    db.save(user_data)
+```
 
-### Prefer Metadata-Driven Behavior
-> "Make most of your data metadata."  
-> — Robert C. Martin, *Clean Code*, Chapter 11 ("Systems – Using Metadata")
+### 2. Metadata-Driven Architecture
+**❌ BAD (Hardcoded UI/Logic):**
+```javascript
+function PrimaryButton({ text }) {
+    return <button style={{ backgroundColor: "#FF0000", padding: "10px" }}>{text}</button>;
+}
+```
 
-- Treat configuration, flags, and static data as metadata that can be reloaded or adjusted without changing code.
-- Whenever practical, move data and configuration into metadata structures (files, tables, documents) so behavior can evolve with minimal code changes and lower entropy.
+**✅ GOOD (Metadata-Driven):**
+```javascript
+// Metadata resides outside the component (e.g., theme.json)
+import theme from './theme.json';
 
+function PrimaryButton({ text }) {
+    // Styling is dynamic and data-driven
+    return <button style={theme.buttons.primary}>{text}</button>;
+}
+```
 
-### Metadata-Driven UI Architecture
-> "UI is configuration, not code."
+---
 
-- **Decouple Styling**: All visual styling (colors, fonts, spacing) MUST be loaded from external configuration (Design Tokens/Theme Objects). hardcoding styles in components is forbidden.
-- **Decouple Navigation**: functionality flows and screen transitions MUST be defined in a metadata structure (Router Configuration, State Machine definition) rather than hardcoded `if/else` redirection logic.
-- **Benefits**: This allows the UI "skin" and "flow" to change without recompiling or refactoring the core logic, significantly reducing entropy for cosmetic and flow changes.
-
-## UML Design Patterns
-
-All modules and components must be implemented using appropriate UML Design Patterns. The pattern selection must be justified by answering the following questions:
-
-1. Which UML Design Pattern best reflects the inner logic and interactions between the elements of the module or component?
-
-2. Which UML Design Pattern minimizes code redundancy?
-
-3. How is the module or component likely to evolve in the future?
-   - Can it be replaced?
-   - Can it be extended?
-   - Can it be branched down or out?
-
-4. How does the selected pattern minimize entropy for expected changes? (See Code Entropy Analysis section above)
-   - Does the pattern reduce the number of components that must be modified for predicted changes?
-   - Does the pattern align with the change patterns identified in the entropy analysis?
-
-5. This guideline is recursive: sub-modules and sub-components may also require UML Design Patterns. The Implementation Plan for a module or component must include sub-modules and sub-components identified during plan creation, or must be updated if identified during maintenance. Each sub-module and sub-component must also include its own Code Entropy analysis.
-
-## Documentation
-
-All modules and components must be documented inline in such a way that:
-
-1. Inline documentation must be usable as a response to the `help()` function, so it must be local to each module or component.
-
-2. Inline documentation must be formatted such that it can be used to generate documentation using tools like Sphinx, so it must be properly referenced to be integrated into a single document.
-
-3. Inline documentation must cover:
-   - Description of the business process the module or component is modeling
-   - Domain classification (Technology Domain or Problem Domain)
-   - UML Design Patterns used and their entropy-reduction rationale
-   - Description of every class and method
-   - Expected change patterns and their entropy implications
-
-## Testing
-
-All modules and components must include unit tests. Integration tests must be identified and implemented or updated as needed.
-
-## Implementation Plan Template
-
-Each Implementation Plan should follow this structure:
-
-1. **Overview:** Brief description of the module/component
-2. **Code Entropy Analysis:** (as described above)
-3. **UML Design Pattern Selection:** Pattern chosen and justification
-4. **Domain Mapping:** Technology Domain or Problem Domain classification
-5. **Component Structure:** Organization of sub-components and their entropy analysis
-6. **Documentation Plan:** What will be documented and how
-7. **Testing Strategy:** Unit and integration test approach
-8. **Change Tracking:** Template for recording actual changes and entropy measurements
-
-## Post-Implementation Review
-
-After implementation, each module/component must undergo a Code Entropy review:
-
-1. Compare actual entropy measurements to predictions
-2. Identify discrepancies and their causes
-3. Document lessons learned for future implementations
-4. Update the Implementation Plan with actual entropy data
-5. Propose refactoring if entropy is consistently higher than predicted
+## 🔍 Self-Consistency Gate: Testing & Review
+Before you finalize a code execution task, ask yourself:
+1. Did I include Unit Tests for the new functions I just wrote?
+2. Did my code follow the Implementation Plan exactly? 
+3. If my code modified 5 files when I predicted it would only modify 2, did I document this discrepancy and propose a future refactor?

@@ -1,58 +1,47 @@
-# Software Sizing Description (Use Case Points for AI Agents)
+# 📐 System Context: Software Sizing (Agent Use Case Points)
 
-## Overview
+## 🤖 Core Operational Directives (Zero-Shot)
+**As an autonomous AI software engineer, you must mathematically estimate the "cost" and complexity of a task before you begin generating code.**
+You operate under resource constraints (Context Window limits, Token usage, API step limits). You must use the **Agent Use Case Points (A-UCP)** framework to predict if a task will exceed your operational limits.
 
-Software Sizing is the process of estimating the size and effort required for a software development task. For AI Agents operating within this framework, we utilize an adapted version of **Use Case Points (UCP)**. This method aligns perfectly with the **Use Case Register** already required by the methodology.
+**Constraints:**
+1. **Mandatory Sizing:** Every Use Case (`UC-XXX`) in the Use Case Register MUST have a documented Complexity rating and A-UCP score.
+2. **Entropy Correlation:** High A-UCP scores correlate with high Code Entropy. If your A-UCP calculation exceeds 15 for a single Implementation Plan, you must break the plan down into smaller, sequential steps.
 
-## Purpose
+---
 
-1.  ** predictability**: Provide a consistent metric to estimate the complexity of a task before execution.
-2.  **Resource Management**: Estimate the **Tokens** (cost) and **Agent Steps** (time/compute) required.
-3.  **Entropy Correlation**: Correlate size with **Code Entropy** to identify high-risk changes.
+## 🧠 Chain-of-Thought (CoT): Sizing Calculation Sub-Routine
+When drafting an Implementation Plan (`IP-XXX`), execute this thought process to calculate the effort required:
 
-## The Metric: Agent Use Case Points (A-UCP)
+```text
+<sizing_calculation_thought>
+1. USE CASE RETRIEVAL: Which `UC-XXX` does this Implementation Plan fulfill?
+2. COMPLEXITY CLASSIFICATION:
+   - Does it involve >7 files, complex error handling, or external APIs? -> COMPLEX (15 A-UCP)
+   - Does it involve 4-7 files and standard logic? -> AVERAGE (10 A-UCP)
+   - Does it involve <4 files and straightforward logic? -> SIMPLE (5 A-UCP)
+3. RESOURCE ESTIMATION:
+   - My Step Estimate: [A-UCP * 2] tool calls.
+   - My Token Estimate: [Step Estimate * 2,500] tokens.
+4. LIMIT CHECK: Does my Step Estimate exceed 30? If yes, this task is too large for a single session and MUST be chunked.
+</sizing_calculation_thought>
+```
 
-Standard UCP measures size based on the number of transactions and actors. For AI Agents, we simplify this into a **Complexity Weighting** system applied to each Use Case in the Use Case Register.
+---
 
-### 1. Complexity Classification
+## 📊 Complexity Classification Table (Few-Shot)
 
-Every Use Case must be classified into one of three complexity levels:
+When updating the Use Case Register (`documentation/requirements/use_cases/use_cases_register.md`), you must append the UCP weight to each row based on this matrix:
 
-| Complexity | Criteria | Weight (UCP) |
+| Classification | Triggers (If ANY match) | Weight (A-UCP) |
 | :--- | :--- | :--- |
-| **Simple** | - < 4 Steps in Main Scenario<br>- < 3 Entities involved<br>- No external API calls | **5** |
-| **Average** | - 4-7 Steps in Main Scenario<br>- 3-7 Entities involved<br>- Standard API calls | **10** |
-| **Complex** | - > 7 Steps in Main Scenario<br>- > 7 Entities involved<br>- Complex logic, error handling, or multiple external systems | **15** |
+| **Simple** | CRUD on a single DB table, CSS tweaks, minor copy changes | **5** |
+| **Average** | 2-3 DB tables, basic API integration, standard form validation | **10** |
+| **Complex** | OAuth flows, payment gateways, multi-step wizards, heavy background jobs | **15** |
 
-### 2. Effort Estimation (The "Agent Velocity")
+---
 
-Unlike human effort (measured in man-hours), AI Agent effort is measured in **Steps** and **Tokens**.
-
-**Baseline Conversion Formula:**
-These values should be calibrated based on project history.
-
-*   **1 UCP ≈ 2 Agent Execution Loops (Steps)**
-*   **1 Agent Step ≈ 2,500 Tokens (Input + Output)**
-
-#### Example Usage:
-A project has:
--   2 Simple Use Cases (2 * 5 = 10 UCP)
--   1 Complex Use Case (1 * 15 = 15 UCP)
-**Total Size**: 25 UCP
-
-**Estimated Effort**:
--   **Steps**: 25 UCP * 2 = **50 Steps**
--   **Tokens**: 50 Steps * 2,500 = **125,000 Tokens**
-
-## Integration with Process
-
-1.  **Identification**: During **Initial Requirements Analysis** or **Change Request Assessment**, identify and classify Use Cases.
-2.  **Registration**: Record the `Complexity` and `UCP` in the **Use Case Register**.
-3.  **Planning**: implementation Plans must reference the total UCP to justify the predicted entropy and resource allocation.
-4.  **Calibration**: After implementation, update the "Actual Steps" and "Actual Tokens" in the **History** to refine the conversion formula.
-
-## Best Practices
-
-*   **Don't Overthink It**: Sizing is an estimate, not a guarantee. Use the "Simple/Average/Complex" buckets quickly.
-*   **Re-evaluate**: If a "Simple" Use Case turns out to need 20 files changed, re-classify it as "Complex" and update the register.
-*   **Traceability**: Ensure every UCP is traceable to a specific Use Case ID.
+## 🔍 Self-Consistency Gate
+Before finalizing a Use Case Register entry or an Implementation Plan:
+1. Did I blindly assign an A-UCP of 5 to a task that involves integrating Stripe? (If yes, I am hallucinating simplicity. Integrate Stripe is Complex = 15).
+2. Is the estimated token cost explicitly documented in the accompanying `IP-XXX`?
