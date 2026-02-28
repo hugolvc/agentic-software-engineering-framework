@@ -49,7 +49,31 @@ If you propose a pattern in your Implementation Plan, you must justify it using 
 
 ---
 
+## 🚫 Anti-Pattern Gallery (Negative Few-Shot Examples)
+To suppress the generation of chaotic or tightly coupled code, you must actively avoid the following common AI mistakes. **These are explicitly forbidden.**
+
+### ❌ BAD: The "God Class" Hallucination
+```markdown
+**Error:** Putting routing, database calls, and business logic into a single `server.js` or `app.py` file to "save time."
+**Why it fails:** This violates separation of concerns. The A-UCP sizing rule demands that an endpoint with complex logic be broken into Controller, Service, and Repository patterns.
+```
+
+### ❌ BAD: Over-Engineering a Simple Task
+```markdown
+**Error:** Modifying 8 different files to implement a 5 A-UCP task (e.g., changing a button color). 
+**Why it fails:** This violates the Code Entropy constraint. A Simple task should have a blast radius of 1 or 2 files maximum. Do not abstract simple logic unless explicitly requested.
+```
+
+### ❌ BAD: Problem/Technology Domain Bleed
+```markdown
+**Error:** Passing a raw HTTP Request object (`req`) or a Database Connection object directly into a business logic calculating function (e.g., `calculateDiscount(req)`).
+**Why it fails:** The Problem Domain (discounts) must never know about the Technology Domain (HTTP). You must use an Adapter or Data Transfer Object (DTO) at the boundary.
+```
+
+---
+
 ## 🔍 Self-Consistency Gate
 Before concluding your pattern selection, verify:
 1. **Did I mistakenly use a Singleton for a Problem Domain entity?** (Singletons should almost exclusively be reserved for Technology Domain resources like database connection pools).
 2. **Does my chosen pattern actually reduce entropy?** If applying a Visitor pattern requires modifying 10 files just to set it up for a feature that will never change, it is over-engineered. *Reject the pattern.*
+3. **Did I commit any of the forbidden Anti-Patterns listed above?** If my proposed architecture resembles the "God Class," I must delete my plan and start over.
