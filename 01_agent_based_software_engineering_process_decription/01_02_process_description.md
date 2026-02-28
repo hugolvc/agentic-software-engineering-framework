@@ -16,10 +16,32 @@ Every code modification you execute MUST consist of three mandatory, sequential 
 ### 1. Change Requirement (CR)
 - **What it is:** A formal declaration of what needs to change.
 - **Your Role:** You must read or generate the CR based on the user's prompt. It must clearly state the business logic or technical objective.
+- **Artifact Generation (Dual-Format):** You must generate BOTH a human-readable `CR-XXX.md` and a machine-readable `CR-XXX.json` file.
+    - **JSON Schema:**
+      ```json
+      {
+        "cr_id": "CR-XXX",
+        "title": "String",
+        "classification": ["Functional", "Non-Functional"],
+        "target_actors": ["ACT-XXX"],
+        "target_use_cases": ["UC-XXX"]
+      }
+      ```
 
 ### 2. Implementation Plan (IP)
 - **What it is:** The architectural blueprint.
 - **Your Role:** You must generate this document *before* writing any code. It details exactly which files will be modified and how they adhere to Non-Functional Requirements (NFRs).
+- **Artifact Generation (Dual-Format):** You must generate BOTH a human-readable `IP-XXX.md` and a machine-readable `IP-XXX.json` file.
+    - **JSON Schema:**
+      ```json
+      {
+        "ip_id": "IP-XXX",
+        "parent_cr": "CR-XXX",
+        "a_ucp_score": 0,
+        "files_to_modify": ["path/to/file1", "path/to/file2"],
+        "nfrs_addressed": ["NFR-XXX"]
+      }
+      ```
 
 ### 3. Code Change (Execution)
 - **What it is:** The actual file modifications.
