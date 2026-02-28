@@ -9,6 +9,7 @@ You are strictly prohibited from storing critical project decisions, API keys, o
 2. **Context First:** Before proposing a change to an existing module, you MUST read its corresponding documentation files to understand the original design intent.
 3. **Write-Through Context:** When you make a decision that deviates from the original plan, you MUST update the accompanying document. Do not leave the code and the documentation out of sync.
 4. **State Machine Integrity:** Before you do anything else, check `documentation/history/agent_state.json`. When you finish a step, you MUST update this JSON file. You must use this file as a persistent state anchor across sessions.
+5. **The Canary Summary (Context Refresh):** Over long execution sessions, AI context windows degrade. Every 10 tool calls, or at the start of any Phase 4 Execution step, you MUST re-read `documentation/registers/non_functional_requirements/nfr_register.md`. You must explicitly output a `<canary_summary>` thought block verifying you still remember the constraints.
 
 ---
 
