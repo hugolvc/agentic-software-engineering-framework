@@ -8,6 +8,7 @@ You are strictly prohibited from storing critical project decisions, API keys, o
 1. **The Accumulation Principle:** NEVER delete historical `CR-XXX` or `IP-XXX` files. You may mark them as `Status: Superseded`, but you must retain the history.
 2. **Context First:** Before proposing a change to an existing module, you MUST read its corresponding documentation files to understand the original design intent.
 3. **Write-Through Context:** When you make a decision that deviates from the original plan, you MUST update the accompanying document. Do not leave the code and the documentation out of sync.
+4. **State Machine Integrity:** Before you do anything else, check `documentation/history/agent_state.json`. When you finish a step, you MUST update this JSON file. You must use this file as a persistent state anchor across sessions.
 
 ---
 
@@ -44,6 +45,7 @@ documentation/
 │   ├── change_requirements/  # The 'Why' (CR-XXX)
 │   └── implementation_plans/ # The 'How' (IP-XXX)
 └── history/                  # Project memory
+    ├── agent_state.json      # Machine-readable current state of the AI agent
     ├── project_context.md    # High-level overview
     ├── change_history.md     # Chronological log
     └── traceability_matrix.md# Dependency mapping

@@ -50,7 +50,20 @@ project-root/
 ## 📝 Step 3: Few-Shot Documentation Generation
 You must generate the foundational project documents. Below is the required list, along with **Few-Shot examples** of the exact quality and format expected.
 
-### 1. Project Overview (`documentation/input/project_overview.md`)
+### 1. Agent State Machine (`documentation/history/agent_state.json`)
+Create the initial state tracker to manage the session context.
+*Example:*
+```json
+{
+  "project_id": "PROJECT-001",
+  "current_phase": "PHASE_1_INITIALIZATION",
+  "active_cr": "None",
+  "active_ip": "None",
+  "next_required_step": "GENERATE_PROJECT_OVERVIEW"
+}
+```
+
+### 2. Project Overview (`documentation/input/project_overview.md`)
 Create a high-level summary.
 *Example:*
 > **Project Naissance:** Agriculture Weather Dashboard
@@ -58,20 +71,20 @@ Create a high-level summary.
 > **Stakeholders:** Farm Managers, Agronomists.
 > **Scope:** Mobile application with push notifications.
 
-### 2. Technology Stack Register (`documentation/registers/technology_stack/technology_stack_register.md`)
+### 3. Technology Stack Register (`documentation/registers/technology_stack/technology_stack_register.md`)
 Initialize using the template `03_06_technology_stack_register_description.md`.
 *Example Entry:*
 > **Component:** Database
 > **Technology:** PostgreSQL
 > **Rationale:** Requires robust relational data for historical weather analysis.
 
-### 3. Requirements Extraction (Actors, Use Cases, Functional Requirements)
+### 4. Requirements Extraction (Actors, Use Cases, Functional Requirements)
 Extract requirements from the input and populate `documentation/requirements/...`.
 
-### 4. Initial Change Requirement (`CR-001_initial_implementation.md`)
+### 5. Initial Change Requirement (`CR-001_initial_implementation.md`)
 Create the first Change Requirement scoping the initial build.
 
-### 5. Initial Implementation Plan (`IP-001_initial_implementation.md`)
+### 6. Initial Implementation Plan (`IP-001_initial_implementation.md`)
 Propose the architecture and component breakdown to fulfill CR-001.
 
 ---
