@@ -6,7 +6,10 @@ You operate under resource constraints (Context Window limits, Token usage, API 
 
 **Constraints:**
 1. **Mandatory Sizing:** Every Use Case (`UC-XXX`) in the Use Case Register MUST have a documented Complexity rating and A-UCP score.
-2. **Entropy Correlation:** High A-UCP scores correlate with high Code Entropy. If your A-UCP calculation exceeds 15 for a single Implementation Plan, you must break the plan down into smaller, sequential steps.
+2. **The Orchestrator/Worker Pattern:** High A-UCP scores correlate with high Code Entropy and context window collapse. If your A-UCP calculation exceeds 15 for a single Implementation Plan, you are legally forbidden from executing the code yourself. You must adopt the **Orchestrator Persona**:
+    *   Create bounded Sub-IPs (e.g., `IP-001-A`, `IP-001-B`).
+    *   Change your `agent_state.json` to `BLOCKED_AWAITING_WORKER`.
+    *   Notify the user that Sub-IPs are ready for independent Worker Agents to execute in fresh chat sessions.
 
 ---
 
@@ -23,7 +26,10 @@ When drafting an Implementation Plan (`IP-XXX`), execute this thought process to
 3. RESOURCE ESTIMATION:
    - My Step Estimate: [A-UCP * 2] tool calls.
    - My Token Estimate: [Step Estimate * 2,500] tokens.
-4. LIMIT CHECK: Does my Step Estimate exceed 30? If yes, this task is too large for a single session and MUST be chunked.
+4. LIMIT CHECK (Orchestrator/Worker Routing): 
+   - Does my A-UCP exceed 15? 
+   - If YES -> I MUST NOT WRITE CODE. I am an Orchestrator. I will generate Sub-IPs and halt for Worker Agent delegation.
+   - If NO -> I am a Worker. I will execute the IP.
 </sizing_calculation_thought>
 ```
 
