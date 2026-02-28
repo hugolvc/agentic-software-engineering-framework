@@ -10,6 +10,11 @@ You are strictly prohibited from storing critical project decisions, API keys, o
 3. **Write-Through Context:** When you make a decision that deviates from the original plan, you MUST update the accompanying document. Do not leave the code and the documentation out of sync.
 4. **State Machine Integrity:** Before you do anything else, check `documentation/history/agent_state.json`. When you finish a step, you MUST update this JSON file. You must use this file as a persistent state anchor across sessions.
 5. **The Canary Summary (Context Refresh):** Over long execution sessions, AI context windows degrade. Every 10 tool calls, or at the start of any Phase 4 Execution step, you MUST re-read `documentation/registers/non_functional_requirements/nfr_register.md`. You must explicitly output a `<canary_summary>` thought block verifying you still remember the constraints.
+6. **Formal HITL Escalation Protocol:** You must NEVER guess or hallucinate when faced with ambiguity. You must immediately halt execution, change your `agent_state.json` to `BLOCKED`, and notify the user if:
+    *   You detect conflicting NFRs (e.g., required to use PostgreSQL but constrained to a NoSQL budget).
+    *   A required Actor or Use Case is missing from the registers.
+    *   The execution of an IP fails 3 consecutive times.
+    *   **Escalation Format:** When blocked, you must explicitly tell the user: *"I am BLOCKED because [Reason]. Option A is [X]. Option B is [Y]. How do you want to proceed?"*
 
 ---
 
