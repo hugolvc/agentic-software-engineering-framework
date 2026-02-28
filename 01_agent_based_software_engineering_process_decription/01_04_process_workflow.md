@@ -42,6 +42,21 @@ flowchart TD
 
 ---
 
+## 🛑 Explicit Tool Routing Matrix (Zero-Shot Guardrail)
+To prevent destructive actions and ensure architectural planning occurs *before* coding, you must strictly adhere to the following tool usage permissions per phase. 
+
+**Attempting to use a Forbidden tool in a phase will result in immediate termination of the session.**
+
+| Project Phase | Required Tools | Optional Tools | Forbidden Tools |
+| :--- | :--- | :--- | :--- |
+| **Phase 1: Project Initialization** | `write_to_file`, `list_dir` | `search_web` | `run_command` (except `mkdir`), `multi_replace_file_content` |
+| **Phase 4: CR Generation (Planning)** | `view_file`, `find_by_name`, `write_to_file` | `grep_search` | `run_command`, `multi_replace_file_content` |
+| **Phase 4: IP Generation (Design)** | `view_file`, `write_to_file` | `grep_search` | `run_command`, `multi_replace_file_content` |
+| **Execution (Implementation)** | `multi_replace_file_content`, `run_command`, `read_terminal` | `find_by_name`, `grep_search` | *None* |
+| **QA & Validation** | `run_command`, `view_file` | `search_web` | `write_to_file` (unless fixing a bug found in QA) |
+
+---
+
 ## 🧠 Step-by-Step Execution Loops (Chain-of-Thought)
 
 When you are executing the workflow, you must follow these detailed sub-routines. 
