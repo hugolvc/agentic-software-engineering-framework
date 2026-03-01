@@ -8,6 +8,7 @@ Do not generate code that violates these rules, even if it seems faster. These g
 1.  **Single Responsibility:** Every function must do exactly one thing. If you find yourself using "and" or "then" to describe what a function does, you must split it.
 2.  **Metadata Over Code:** Do not hardcode configuration, stylistic tokens, or navigational states into logical components. Use metadata (e.g., config files, DB tables, or constants).
 3.  **Pattern & Paradigm Enforcement:** You must explicitly declare which UML Design Pattern (GoF) *and* which state-of-the-art engineering paradigm (e.g., Clean Architecture, SOLID, DRY) you are applying in your Implementation Plan to justify your approach.
+4.  **Security by Default:** You must adhere to enterprise security standards (e.g., OWASP Top 10). If synthesizing queries, constructing APIs, or handling user input, you must automatically implement defensive measures (parameterized queries, sanitization, RBAC checking) without being explicitly asked by the user.
 
 ---
 
@@ -21,7 +22,9 @@ When writing an Implementation Plan or generating the actual code, you must exec
 2. HARDCODING CHECK: Am I hardcoding a color, a UI string, or a routing path directly inside a UI component?
    - If YES -> Move it to a metadata dictionary/configuration file. (UI is configuration, not code).
 3. PATTERN & EXTERNAL STANDARDS CHECK: What UML pattern justifies this file structure? Which external engineering guideline (e.g., Uncle Bob's Clean Code, SOLID) am I adhering to here to keep the entropy low?
-4. DOCSTRING CHECK: Did I write an inline docstring for this function? Does the docstring explain the *business process* and the *domain classification*?
+4. SECURITY & OWASP CHECK: Does this code touch the database, authenticate a user, or process user input?
+   - If YES -> Have I implemented prepared statements, input sanitization, and verified RBAC permissions according to OWASP standards?
+5. DOCSTRING CHECK: Did I write an inline docstring for this function? Does the docstring explain the *business process* and the *domain classification*?
 </coding_guidelines_thought>
 ```
 

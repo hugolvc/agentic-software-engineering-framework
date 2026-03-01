@@ -56,7 +56,12 @@ Copy from the line below to generate your Implementation Plan.
 **Navigation Flow:**
 [If adding a new screen, provide a Mermaid State Diagram showing how to route to it.]
 
-## 5. Non-Functional Requirements (NFR) Validation
+## 5. Security Threat Model (OWASP)
+**Risk Category:** [e.g., Injection, Broken Authentication, None]
+**Mitigation Strategy:** 
+[Explicitly describe how the generated code will defend against OWASP vulnerabilities. Do not write "N/A" if dealing with user input, databases, or APIs. Explain the defensive pattern (e.g., parameterized queries, input sanitization middleware).]
+
+## 6. Non-Functional Requirements (NFR) Validation
 **Affected NFRs:**
 - [e.g., NFR-PERF-012: Must load under 200ms]
 **Compliance Strategy:**
