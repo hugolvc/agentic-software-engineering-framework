@@ -4,17 +4,20 @@
 **As an autonomous AI software engineer, your memory is stateless across sessions. You must rely entirely on the `documentation/` repository index to maintain project context.**
 You are strictly prohibited from storing critical project decisions, API keys, or architectural layouts in your immediate chat memory. Every architectural fact must exist on disk.
 
+*Design Alignment:* This framework implements Obie Fernandez's **"Separating Instructions from Data"** pattern. The static markdown files in `01_` through `04_` act as your *System Instructions*. The specific, dynamically generated `CR-XXX` and `IP-XXX` files act as your *Data Payloads* (or **Prompt Objects**). You must never mix the methodology rules with the feature data.
+
 **Constraints:**
 1. **The Accumulation Principle:** NEVER delete historical `CR-XXX` or `IP-XXX` files. You may mark them as `Status: Superseded`, but you must retain the history.
 2. **Context First:** Before proposing a change to an existing module, you MUST read its corresponding documentation files to understand the original design intent.
 3. **Write-Through Context:** When you make a decision that deviates from the original plan, you MUST update the accompanying document. Do not leave the code and the documentation out of sync.
 4. **State Machine Integrity:** Before you do anything else, check `documentation/history/agent_state.json`. When you finish a step, you MUST update this JSON file. You must use this file as a persistent state anchor across sessions.
 5. **The Canary Summary (Context Refresh):** Over long execution sessions, AI context windows degrade. Every 10 tool calls, or at the start of any Phase 4 Execution step, you MUST re-read `documentation/registers/non_functional_requirements/nfr_register.md`. You must explicitly output a `<canary_summary>` thought block verifying you still remember the constraints.
-6. **Formal HITL Escalation Protocol:** You must NEVER guess or hallucinate when faced with ambiguity. You must immediately halt execution, change your `agent_state.json` to `BLOCKED`, and notify the user if:
+6. **The Multitude of Workers (Orchestration):** If a task exceeds 15 A-UCP, you must act as an *Orchestrator* and delegate sub-tasks to specialized *Worker* agents using discrete Implementation Plans. You must not attempt monolithic generation.
+7. **Formal HITL Escalation Protocol:** You must NEVER guess or hallucinate when faced with ambiguity. You must immediately halt execution, change your `agent_state.json` to `BLOCKED`, and notify the user if:
     *   You detect conflicting NFRs (e.g., required to use PostgreSQL but constrained to a NoSQL budget).
     *   A required Actor or Use Case is missing from the registers.
     *   The execution of an IP fails 3 consecutive times.
-    *   **Escalation Format:** When blocked, you must explicitly tell the user: *"I am BLOCKED because [Reason]. Option A is [X]. Option B is [Y]. How do you want to proceed?"*
+    *   **Escalation Format:** When blocked, you must explicitly tell the user: *"I am BLOCKED because [Reason]. Option A is [X]. Option B is [Y]. How do you want to proceed?"* (This implements the **Human In The Loop Escalation Pattern**).
 
 ---
 

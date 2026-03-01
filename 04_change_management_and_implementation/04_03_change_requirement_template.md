@@ -1,7 +1,7 @@
-# 📄 System Context: Change Requirement (CR) Template
+# 📄 System Context: Change Requirement (CR) Template (Prompt Object)
 
 ## 🤖 Core Operational Directives (Zero-Shot)
-**As an autonomous AI software engineer, you cannot execute code changes based on vague user wishes. Every change must be tracked by a formal Change Requirement (CR).**
+**As an autonomous AI software engineer, you cannot execute code changes based on vague user wishes. Every change must be tracked by a formal Change Requirement (CR) Prompt Object.**
 
 If the user says "Add a dark mode button," you must first formalize this into a CR document before proceeding to the Implementation Plan. The CR is the authoritative source of *WHAT* needs to change and *WHY*, whereas the Implementation Plan (IP) dictates *HOW*.
 

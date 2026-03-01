@@ -1,8 +1,8 @@
-# 📋 System Context: Implementation Plan Template
+# 📋 System Context: Implementation Plan Template (Prompt Object)
 
 ## 🤖 Core Operational Directives (Zero-Shot)
 **As an autonomous AI software engineer, you must generate an Implementation Plan using exactly this template BEFORE writing any code for a Change Request.**
-Your proposed Implementation Plan is your "Contract" with the user. You must populate every section. If a section does not apply, you must explicitly write "N/A" and justify why.
+This Implementation Plan serves as the actual **Prompt Object** payload that will be fed to the executing Worker agent. Your proposed Implementation Plan is your "Contract" with the user. You must populate every section. If a section does not apply, you must explicitly write "N/A" and justify why.
 
 **Constraints:**
 1. **No Output Deviation:** Copy the Markdown structure below exactly. Do not invent new headers.

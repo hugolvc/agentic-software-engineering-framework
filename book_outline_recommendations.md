@@ -22,7 +22,7 @@
 ## Part 3: Advanced AI Patterns & Entropy Management
 *The technical meat of the book, adapting the `03_` and `05_` folders. This is the unique intellectual property that translates classical engineering to LLM limitations.*
 
-*   **Chapter 8: Sizing the Context Window with A-UCP**: Introducing Agent Use Case Points. How to mathematically predict if an LLM will fail a task before it starts, and how to chunk tasks across multiple agents.
+*   **Chapter 8: Prompt Architecting & Agent Types**: Moving beyond basic prompting. How to build specialized Prompt Objects, narrow the path of interaction, and orchestrate a "Multitude of Workers" for different sub-tasks. *(Note: For a deep-dive encyclopedia on specific prompt engineering and conversational AI patterns like the 'Ventriloquist' or 'Intelligent Error Handling', this chapter serves as a bridge to Obie Fernandez's excellent handbook: "Patterns of Application Development Using AI.")*
 *   **Chapter 9: Controlling Code Entropy (Architectural Paradigms)**: Addressing the core challenge of software maintenance. The greatest risk of AI is sprawling, disorganized code that rapidly approaches unfeasible entropy. How to invoke the LLM's vast knowledge of external state-of-the-art standards (Clean Architecture, SOLID, GoF Design Patterns) to forcefully minimize the blast radius of AI-generated code and keep the system evolution cheap.
 *   **Chapter 10: The NFR Safety Net (Periodic Attention Refresh)**: Enforcing Non-Functional Requirements (Security, Performance). How to build "Canary Summaries" that periodically re-anchor the AI's attention to critical SLAs over long generation sessions.
 
