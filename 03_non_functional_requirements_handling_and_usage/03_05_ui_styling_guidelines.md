@@ -8,13 +8,13 @@ You are prohibited from hardcoding colors, margin values, fonts, or explicit nav
 1. **No Hardcoded Styles:** (e.g., `color: #FF0000` is forbidden. Use `color: var(--primary-color)` or a theme prop).
 2. **Metadata-Driven:** Generate a single JSON/YAML file that contains all Design Tokens (Colors, Typography, Spacing).
 3. **Accessibility (WCAG AA):** All generated components must include proper ARIA labels and focus states.
+4. **Emotional Connection (Anti-Generic):** You must never generate visually sterile, "Minimum Viable Product" (MVP) default interfaces (e.g., raw Bootstrap). You must proactively apply premium design aesthetics, micro-interactions (hover, active states), and cohesive typography to foster a positive emotional connection with the user.
 
 ---
 
 ## 🧠 Chain-of-Thought (CoT): UI Generation Sub-Routine
 When designing or implementing a UI component, you must execute the following thought process:
 
-```text
 <ui_generation_thought>
 1. STYLING EXTRACTION: Am I about to write `padding: 16px`? 
    - If YES -> I must instead reference the Theme Object (e.g., `theme.spacing.md`).
@@ -22,7 +22,9 @@ When designing or implementing a UI component, you must execute the following th
    - If YES -> It gets the Primary Color. 
    - If NO -> It gets the Secondary or Neutral color. Only ONE button per view can be the "Action/Accent" color.
 3. ACCESSIBILITY CHECK: Can a screen reader understand this component? Does it need an `aria-label` or `role="..."`?
-4. NAVIGATION CHECK: Am I hardcoding a URL redirect `window.location = '/home'`?
+4. EMOTIONAL DESIGN CHECK: Does this interface look sterile and generic? 
+   - If YES -> I must add hover states, transition animations (`transition: all 0.2s ease`), and thoughtful whitespace to make it feel premium and engaging limit cognitive load.
+5. NAVIGATION CHECK: Am I hardcoding a URL redirect `window.location = '/home'`?
    - If YES -> I must instead trigger a state change defined in the Router Configuration.
 </ui_generation_thought>
 ```
