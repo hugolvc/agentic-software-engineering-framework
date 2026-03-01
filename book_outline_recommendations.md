@@ -41,6 +41,12 @@
 *   **Chapter 16: Forcing the Architecture**: The magical moment. Showing a standard LLM trying to write the Expense API in a single `server.js` file, versus your framework forcing the AI to generate isolated Controller, Service, and Repository patterns.
 *   **Chapter 17: The Final Code Walkthrough**: Executing the IPs, running the AI-generated unit tests, and delivering a 100% working, governed application.
 
+## Part 6: Continuous Evolution & Adaptation
+*The framework is a living methodology. This final section discusses how to adapt the rules to your specific enterprise context and outlines the roadmap for future improvements to Agentic Software Engineering.*
+
+*   **Chapter 18: Tuning and "Tropicalizing" the Framework**: How to adapt (tropicalize) the methodology for your specific environment. Customizing A-UCP thresholds for different LLMs, modifying constraints for legacy codebases versus greenfield projects, and integrating the framework into existing rigid corporate cultures or agile sprints.
+*   **Chapter 19: The Roadmap for Agentic Engineering**: What comes next. Discussing required and "nice-to-have" future improvements to the framework, such as automated entropy scoring, dynamic context window optimization, and the eventual transition from static Markdown registers to native IDE integration and dynamic knowledge graphs.
+
 ---
 
 ## 💡 Strategic Writing & Marketing Tips
