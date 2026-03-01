@@ -23,7 +23,7 @@
 *The technical meat of the book, adapting the `03_` and `05_` folders. This is the unique intellectual property that translates classical engineering to LLM limitations.*
 
 *   **Chapter 8: Prompt Architecting & Agent Types**: Moving beyond basic prompting. How to build specialized Prompt Objects, narrow the path of interaction, and orchestrate a "Multitude of Workers" for different sub-tasks. *(Note: For a deep-dive encyclopedia on specific prompt engineering and conversational AI patterns like the 'Ventriloquist' or 'Intelligent Error Handling', this chapter serves as a bridge to Obie Fernandez's excellent handbook: "Patterns of Application Development Using AI.")*
-*   **Chapter 9: Controlling Code Entropy (Architectural Paradigms)**: Addressing the core challenge of software maintenance. The greatest risk of AI is sprawling, disorganized code that rapidly approaches unfeasible entropy. How to invoke the LLM's vast knowledge of external state-of-the-art standards (Clean Architecture, SOLID, GoF Design Patterns) to forcefully minimize the blast radius of AI-generated code and keep the system evolution cheap.
+*   **Chapter 9: Controlling Code Entropy (Architectural Paradigms)**: Addressing the core challenge of software maintenance. The greatest risk of AI is sprawling, disorganized code that rapidly approaches unfeasible entropy. How to invoke the LLM's vast knowledge of external state-of-the-art standards (Clean Architecture, SOLID, GoF Design Patterns) to forcefully minimize the blast radius of AI-generated code and keep the system evolution cheap. *(Note: While this chapter dictates the macro-architecture, developers seeking strict tactical rules for reviewing AI code, spotting AI-specific bugs, and structuring daily commits should read Brett Chalupa's "Effective Coding with AI.")*
 *   **Chapter 10: The NFR Safety Net (Periodic Attention Refresh)**: Enforcing Non-Functional Requirements (Security, Performance). How to build "Canary Summaries" that periodically re-anchor the AI's attention to critical SLAs over long generation sessions.
 
 ## Part 4: Implementation & Automation
@@ -73,7 +73,7 @@ Getting this framework to your target audience (CTOs, Lead Devs, AI Engineers) r
     *   **Git Integration:** Write the book *in* this very repository using Markdown.
     *   **Maximum Reach:** You get the dedicated tech early-adopter audience of Leanpub *and* the global monopoly of Amazon.
     *   **High Royalties:** Keep 80% on Leanpub and up to 70% on Amazon Kindle.
-*   **Best for:** A framework like Agentic Software Engineering that is evolving. You can sell it as "early access" on Leanpub today, and launch the finalized V1 on Amazon later without rewriting your formatting pipeline.
+*   **Best for:** A framework like Agentic Software Engineering that is evolving. You can sell it as "early access" on Leanpub today, and launch the finalized V1 on Amazon later without rewriting your formatting pipeline. *(Note: The success of introductory texts like Wasi's "Agentic Coding for Beginners" on Leanpub strongly validates that this platform's core demographic is actively searching for and purchasing content on this specific subject).*
 
 ### Alternative Option 1: Pure Self-Publishing (Gumroad + Custom Site)
 *   **How it Works:** You format the book yourself and sell PDF/bundles on a landing page via Gumroad or Stripe.
