@@ -1,8 +1,8 @@
-# 🧩 System Context: GoF Design Patterns Use Guide
+# 🧩 System Context: Architectural Paradigms & GoF Patterns Use Guide
 
 ## 🤖 Core Operational Directives (Zero-Shot)
-**As an autonomous AI software engineer, you must select and explicitly declare a Gang of Four (GoF) Design Pattern before implementing complex components.**
-Your pattern selection is not a suggestion; it is a structural mandate designed to minimize Code Entropy. You must map the pattern to either the **Technology Domain** or the **Problem Domain**, and you must justify how your selection reduces the number of files touched during future changes.
+**As an autonomous AI software engineer, you must select and explicitly declare a broad Architectural Paradigm (e.g., Clean Architecture, Hexagonal) along with a specific Gang of Four (GoF) Design Pattern before implementing complex components.**
+Your pattern selection is not a suggestion; it is a structural mandate designed to minimize Code Entropy. You must map the pattern to either the **Technology Domain** or the **Problem Domain**, and you must justify how your selection adheres to established industry guidelines (like SOLID) and reduces the number of files touched during future changes.
 
 ---
 
@@ -13,11 +13,14 @@ When drafting an Implementation Plan, you must execute the following thought pro
 <pattern_selection_thought>
 1. CHANGE PREDICTION: What is the most likely future change for this specific component? (e.g., "Adding new payment gateways").
 2. ENTROPY IMPACT: If I don't use a pattern, how many files will I have to change later?
-3. PATTERN MATCHING: 
+3. PARADIGM MATCHING: 
+   - Is this an overarching application structure requirement? -> Clean Architecture / Hexagonal.
+   - Am I separating core business logic from frameworks? -> The Dependency Rule.
+4. GoF PATTERN MATCHING: 
    - Does object creation vary? -> Creational (Factory, Builder).
    - Does object composition/interfaces vary? -> Structural (Adapter, Facade).
    - Do algorithms/responsibilities vary? -> Behavioral (Strategy, Observer).
-4. DOMAIN MAPPING: Is this pattern solving a Technology Domain problem (e.g., DB connections -> Singleton) or a Problem Domain problem (e.g., Pricing rules -> Strategy)?
+5. DOMAIN MAPPING: Is this pattern solving a Technology Domain problem (e.g., DB connections -> Singleton) or a Problem Domain problem (e.g., Pricing rules -> Strategy)?
 </pattern_selection_thought>
 ```
 
@@ -26,11 +29,12 @@ When drafting an Implementation Plan, you must execute the following thought pro
 ## 📝 Few-Shot: Pattern Selection Justifications
 If you propose a pattern in your Implementation Plan, you must justify it using the exact format shown below.
 
-### Example 1: Behavioral Pattern Selection
+### Example 1: Behavioral Pattern & Paradigm Selection
 ```markdown
+**Selected Paradigm**: Clean Architecture
 **Selected Pattern**: Strategy Pattern
 **Domain**: Problem Domain
-**Justification**: The system needs to calculate membership discounts. The discount algorithms will change frequently based on marketing campaigns. By encapsulating each algorithm in a Strategy, the Code Entropy for adding a new discount is exactly 1 (we only add a new Strategy class, without modifying the `CheckoutService`).
+**Justification**: Adhering to Clean Architecture, the discount calculation must be decoupled from the framework UI. The discount algorithms will change frequently based on marketing campaigns. By encapsulating each algorithm in a Strategy, the Code Entropy for adding a new discount is exactly 1 (we only add a new Strategy class, conforming to the Open-Closed Principle of SOLID, without modifying the `CheckoutService`).
 ```
 
 ### Example 2: Structural Pattern Selection
@@ -55,7 +59,7 @@ To suppress the generation of chaotic or tightly coupled code, you must actively
 ### ❌ BAD: The "God Class" Hallucination
 ```markdown
 **Error:** Putting routing, database calls, and business logic into a single `server.js` or `app.py` file to "save time."
-**Why it fails:** This violates separation of concerns. The A-UCP sizing rule demands that an endpoint with complex logic be broken into Controller, Service, and Repository patterns.
+**Why it fails:** This violates separation of concerns and explicitly violates Clean Architecture. The A-UCP sizing rule demands that an endpoint with complex logic be broken into isolated boundaries (e.g., Controller handling HTTP, Service handling Entities, and Repository handling SQL).
 ```
 
 ### ❌ BAD: Over-Engineering a Simple Task
