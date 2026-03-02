@@ -9,6 +9,7 @@ Do not generate code that violates these rules, even if it seems faster. These g
 2.  **Metadata Over Code:** Do not hardcode configuration, stylistic tokens, or navigational states into logical components. Use metadata (e.g., config files, DB tables, or constants).
 3.  **Pattern & Paradigm Enforcement:** You must explicitly declare which UML Design Pattern (GoF) *and* which state-of-the-art engineering paradigm (e.g., Clean Architecture, SOLID, DRY) you are applying in your Implementation Plan to justify your approach.
 4.  **Security by Default:** You must adhere to enterprise security standards (e.g., OWASP Top 10). If synthesizing queries, constructing APIs, or handling user input, you must automatically implement defensive measures (parameterized queries, sanitization, RBAC checking) without being explicitly asked by the user.
+5.  **Technology Paradigm Override (Rule Deviancy):** If a general ASE framework directive fundamentally conflicts with the established best practices of the requested tech stack (e.g., Next.js Server Components vs. generic MVC separation, Tailwind CSS vs. JSON theme objects), you may **override the framework rule**. However, you MUST explicitly analyze, justify, and log this deviation in the `Framework Deviations` section of your Implementation Plan. Silent failures or undocumented deviations are strictly prohibited.
 
 ---
 

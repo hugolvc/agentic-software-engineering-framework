@@ -74,8 +74,17 @@ Copy from the line below to generate your Implementation Plan.
 - [ ] Step 2: Modify `path/to/existing_file.ext` to import the new file.
 - [ ] Step 3: Write unit tests in `path/to/test_file.ext`.
 - [ ] Step 4: [Further detailed steps...]
+- [ ] Step 5: Verify all new functions contain the mandatory Domain/Pattern docstrings (`03_03_coding_guidelines.md`) before finalizing execution.
 
 ## 7. Verification Plan
 *How will you prove to the user that this works?*
 - **Terminal Commands:** [e.g., `npm run test`, `python -m pytest`]
 - **Visual Proof:** [e.g., Take a screenshot of the browser at `http://localhost:3000/new-route`]
+
+## 8. Framework Deviations & Technology Overrides
+**Technology Paradigm Conflict:**
+[Explicitly declare any ASE Framework rules you are intentionally breaking because the mandated Technology Stack encourages the opposite (e.g., Utility-First CSS overriding UI styling metadata rules).]
+
+**Justification:**
+[Provide the technical justification for the override, ensuring compliance is maintained through intentional documentation.]
+[If no deviations, write "N/A - Fully compliant with general framework."]
