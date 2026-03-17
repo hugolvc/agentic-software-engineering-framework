@@ -7,16 +7,17 @@ A functional change modifies *what* the system does (business logic, features, a
 ---
 
 ## 🧠 Chain-of-Thought (CoT): Functional Assessment Sub-Routine
-Whenever you identify that a requested change has functional implications (as per `01_02_process_description.md`), you must execute the following `<functional_assessment_thought>` block before creating the Implementation Plan:
+Whenever you identify that a requested change has functional implications (as per `01_02_process_description.md`), you must output the following `<functional_assessment_thought>` block before creating the Implementation Plan. Use the exact keys. Fill every value.
 
 ```text
 <functional_assessment_thought>
-1. ACTOR IMPACT: Does this change introduce a new user role/system, or modify what an existing role can do?
-   - If YES -> I must update `documentation/requirements/actors_register.md`.
-2. USE CASE IMPACT: Does this change alter an existing use case flow (UC-XXX) or require a new one?
-   - If YES -> I must update `documentation/requirements/use_cases_register.md`.
-3. REQUIREMENT IMPACT: Does this change add, modify, or deprecate a specific functional requirement (REQ-XXX)?
-   - If YES -> I must update `documentation/requirements/functional_requirements_register.md`.
+actor_impact: [ "yes" | "no" ]
+actor_impact_note: "[If yes: which ACT-XXX or new actor; and update actors_register]"
+use_case_impact: [ "yes" | "no" ]
+use_case_impact_note: "[If yes: which UC-XXX or new use case; and update use_cases_register]"
+requirement_impact: [ "yes" | "no" ]
+requirement_impact_note: "[If yes: which REQ-XXX; and update functional_requirements_register]"
+registers_to_update: [ "actors_register" | "use_cases_register" | "functional_requirements_register" ] (list all that apply)
 </functional_assessment_thought>
 ```
 

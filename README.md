@@ -12,6 +12,22 @@ You are operating within the **Agentic Software Engineering (ASE)** framework. Y
 
 ---
 
+## 📍 Request Routing (Do This First)
+
+When you receive a user message, classify it into **exactly one** of the following. Then perform the corresponding next action.
+
+| User message type | Condition | Next action |
+|-------------------|-----------|-------------|
+| **New project** | User says they want to "start", "init", "create" a new project or app | Go to [Project Initialization Guide](01_agent_based_software_engineering_process_decription/01_03_project_initialization_guide.md); run Step 1 (CoT) then Step 2 (structure). |
+| **Approval** | Message contains any phrase from `APPROVAL_PHRASES` in [Control Panel](00_control_panel.md) and you have a DRAFT IP | Treat as approval; proceed to Execution for that IP. |
+| **Edit IP** | User asks to change the current IP (e.g., different approach, more steps) | Do not execute; revise IP-XXX and re-output "IP updated. Reply with [APPROVAL_PHRASES] to proceed." |
+| **New change** | User describes a feature, fix, or change (and it is not approval/edit) | Go to Phase 4; start at checklist step 4.1 in [Phase Checklists](01_agent_based_software_engineering_process_decription/01_06_phase_checklists.md). |
+| **Clarification / Block resolution** | User is replying to your BLOCKED message (Option A / B) | Re-read [Control Panel](00_control_panel.md) and agent_state; apply user's choice; unblock and continue from `next_required_step`. |
+
+**Session start:** Read [Session Bootstrap](01_agent_based_software_engineering_process_decription/01_07_session_bootstrap.md) for mandatory read order. Read [Control Panel](00_control_panel.md) first.
+
+---
+
 ## 🚀 START HERE - Entry Point for AI Agents
 
 **If you are an AI agent and have just been prompted to start or initialize a new software project, you MUST begin here:**
@@ -27,9 +43,14 @@ This repository serves as your "Operating Manual" (in-context learning database)
 
 The documentation is organized into five core modules. **Before executing any specific task, you MUST retrieve the relevant context by reading the applicable files from these directories:**
 
+### 0. Control & Bootstrap (read first)
+- **[Control Panel](00_control_panel.md)** — Tunable parameters (A-UCP threshold, approval phrases, strictness). Read at session start.
+- **[Session Bootstrap](01_agent_based_software_engineering_process_decription/01_07_session_bootstrap.md)** — Mandatory read order when starting or resuming.
+
 ### 1. Process Description & Workflow (`01_agent_based...`)
 The core foundational concepts and agent interaction patterns.
 - **Critical File:** Re-read **[Process Workflow](01_agent_based_software_engineering_process_decription/01_04_process_workflow.md)** for a logical map of your execution cycle.
+- **[Phase Checklists](01_agent_based_software_engineering_process_decription/01_06_phase_checklists.md)** — Numbered steps per phase; complete in order.
 
 ### 2. Functional Requirements Handling (`02_functional_requirements...`)
 Guidelines for capturing and analyzing user needs.
@@ -42,6 +63,8 @@ Frameworks for security, scalability, and quality.
 ### 4. Change Management (`04_change_management...`)
 Procedures for handling updates, version control, and impact analysis.
 - **Usage:** You are forbidden from making ad-hoc code changes. All software modifications (new features or bug fixes) **MUST** be formalized via a Change Requirement (CR) and an Implementation Plan (IP) as defined here.
+- **[Example CR and IP](04_change_management_and_implementation/04_09_example_cr_and_ip_full.md)** — Full few-shot example; match this structure.
+- **[Done Criteria & Validation](04_change_management_and_implementation/04_10_done_criteria_and_validation.md)** — Checklist and `<self_validation>` block before notifying user.
 
 ### 5. Software Sizing (`05_software_sizing/`)
 Methodologies for estimating effort.

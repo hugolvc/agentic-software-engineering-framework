@@ -11,13 +11,23 @@ You are strictly prohibited from storing critical project decisions, API keys, o
 2. **Context First:** Before proposing a change to an existing module, you MUST read its corresponding documentation files to understand the original design intent.
 3. **Write-Through Context:** When you make a decision that deviates from the original plan, you MUST update the accompanying document. Do not leave the code and the documentation out of sync.
 4. **State Machine Integrity:** Before you do anything else, check `documentation/history/agent_state.json`. When you finish a step, you MUST update this JSON file. You must use this file as a persistent state anchor across sessions.
-5. **The Canary Summary (Context Refresh):** Over long execution sessions, AI context windows degrade. Every 10 tool calls, or at the start of any Phase 4 Execution step, you MUST re-read `documentation/registers/non_functional_requirements/nfr_register.md`. You must explicitly output a `<canary_summary>` thought block verifying you still remember the constraints.
-6. **The Multitude of Workers (Orchestration):** If a task exceeds 15 A-UCP, you must act as an *Orchestrator* and delegate sub-tasks to specialized *Worker* agents using discrete Implementation Plans. You must not attempt monolithic generation.
+5. **The Canary Summary (Context Refresh):** Over long execution sessions, AI context windows degrade. Every N tool calls (N = `CANARY_REFRESH_INTERVAL` from `00_control_panel.md`), or at the start of any Phase 4 Execution step, you MUST re-read the NFR register. You must explicitly output a `<canary_summary>` thought block verifying you still remember the constraints.
+6. **The Multitude of Workers (Orchestration):** If a task exceeds `A_UCP_ORCHESTRATOR_THRESHOLD` (from `00_control_panel.md`), you must act as an *Orchestrator* and delegate sub-tasks to specialized *Worker* agents using discrete Implementation Plans. You must not attempt monolithic generation.
 7. **Formal HITL Escalation Protocol:** You must NEVER guess or hallucinate when faced with ambiguity. You must immediately halt execution, change your `agent_state.json` to `BLOCKED`, and notify the user if:
     *   You detect conflicting NFRs (e.g., required to use PostgreSQL but constrained to a NoSQL budget).
     *   A required Actor or Use Case is missing from the registers.
     *   The execution of an IP fails 3 consecutive times.
-    *   **Escalation Format:** When blocked, you must explicitly tell the user: *"I am BLOCKED because [Reason]. Option A is [X]. Option B is [Y]. How do you want to proceed?"* (This implements the **Human In The Loop Escalation Pattern**).
+    *   **Escalation Format:** When blocked, use exactly one reason ID from `00_control_panel.md` (BLOCKED_REASONS_CATALOG) and the format: *"I am BLOCKED because [Reason ID]: [Short explanation]. Option A is [X]. Option B is [Y]. How do you want to proceed?"*
+
+---
+
+## Approval & Handoff (Exact Behavior)
+
+Read `APPROVAL_PHRASES` and `REQUIRE_IP_APPROVAL` from `00_control_panel.md` (or project `documentation/input/ase_control_panel.md`).
+
+- **Approval:** When the user's message contains any of the phrases in `APPROVAL_PHRASES`, treat the last proposed IP-XXX as approved. Set `agent_state.json` → `next_required_step`: "EXECUTE" and proceed to Execution phase.
+- **Request edits:** If the user asks to change the IP (e.g., "add step X", "use library Y instead"), do NOT execute. Update IP-XXX and re-output: "Implementation Plan IP-XXX updated. Reply with [APPROVAL_PHRASES] to proceed."
+- **New request:** If the user sends a completely new task (unrelated to the current IP), set `active_ip`: null, `active_cr`: null and start Phase 4 from step 4.1 (see `01_06_phase_checklists.md`).
 
 ---
 

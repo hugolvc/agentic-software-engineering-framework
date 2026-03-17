@@ -7,16 +7,17 @@ A non-functional change modifies *how* the system performs (e.g., security, spee
 ---
 
 ## 🧠 Chain-of-Thought (CoT): Non-Functional Assessment Sub-Routine
-Whenever you process a Change Requirement, you must execute the following `<non_functional_assessment_thought>` block before creating the Implementation Plan:
+Whenever you process a Change Requirement, you must output the following `<non_functional_assessment_thought>` block before creating the Implementation Plan. Use the exact keys. Fill every value.
 
 ```text
 <non_functional_assessment_thought>
-1. TECH STACK IMPACT: Does this change require adding a new library, replacing a framework, or altering the execution environment?
-   - If YES -> I must update `documentation/registers/technology_stack_register.md`.
-2. NFR IMPACT: Does this change alter performance metrics, security rules, or reliability requirements (NFR-XXX)?
-   - If YES -> I must update `documentation/registers/nfr_register.md`.
-3. ENTROPY ASSESSMENT: Does this change touch multiple fragile components? Can I refactor an existing component to optimize entropy accumulation before applying the new logic?
-   - If YES -> I must explicitly include Refactoring steps in my Implementation Plan.
+tech_stack_impact: [ "yes" | "no" ]
+tech_stack_impact_note: "[If yes: which library/framework; update technology_stack_register]"
+nfr_impact: [ "yes" | "no" ]
+nfr_impact_note: "[If yes: which NFR-XXX; update nfr_register]"
+entropy_assessment: [ "high" | "medium" | "low" ]
+entropy_note: "[If high: include Refactoring steps in IP]"
+registers_to_update: [ "technology_stack_register" | "nfr_register" ] (list all that apply)
 </non_functional_assessment_thought>
 ```
 

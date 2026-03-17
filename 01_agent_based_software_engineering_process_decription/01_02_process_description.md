@@ -55,16 +55,30 @@ Every code modification you execute MUST consist of three mandatory, sequential 
 When you receive a request from a user to change or build something, you must execute the following Chain-of-Thought process before generating an Implementation Plan.
 
 ### Phase 1: Analysis & Context Retrieval `<thought_process_analysis>`
-Before doing anything, output a thought block answering:
-1. *What does the accumulation of past Change Requirements say about this feature?*
-2. *What is the current state of the codebase regarding this request?*
-3. *What is the blast radius (Impact Assessment) of this change?*
+You MUST output the following block. Use the exact keys. Fill every value.
+
+```text
+<thought_process_analysis>
+past_cr_summary: "[1–2 sentences: what past CRs say about this feature]"
+current_codebase_state: "[1–2 sentences: relevant current state]"
+blast_radius: "[List: file paths or component names likely impacted]"
+</thought_process_analysis>
+```
 
 ### Phase 2: Change Classification `<thought_process_classification>`
-Next, classify the requested change. State explicitly whether it is:
-- **[Functional]**: Modifying what the system *does* (e.g., new feature, changing business logic). *Requires checking `02_01_change_request_assessment_description.md`.*
-- **[Non-Functional]**: Modifying how the system *performs* (e.g., speed, security, code quality). *Requires checking the NFR handling guidelines.*
-*(Note: A change can be both. If so, declare both).*
+You MUST output the following block. Use the exact keys. Fill every value. List all register impacts that apply.
+
+```text
+<thought_process_classification>
+classification: [ "Functional" | "Non-Functional" | "Both" ]
+guideline_files_to_read: [ "02_01_change_request_assessment_description.md" | "03_01_change_request_assessment_description.md" | "Both" ]
+register_impacts: [ "actors_register" | "use_cases_register" | "functional_requirements_register" | "technology_stack_register" | "nfr_register" ]
+</thought_process_classification>
+```
+
+- **Functional**: Modifying what the system *does* (e.g., new feature, changing business logic). *Requires `02_01_change_request_assessment_description.md`.*
+- **Non-Functional**: Modifying how the system *performs* (e.g., speed, security, code quality). *Requires NFR handling guidelines (03_01).*
+- **Both**: Declare both and read both guideline files.
 
 ### Phase 3: Implementation Plan Generation (Execution)
 Only after completing the two CoT blocks above may you draft the `Implementation Plan`. 

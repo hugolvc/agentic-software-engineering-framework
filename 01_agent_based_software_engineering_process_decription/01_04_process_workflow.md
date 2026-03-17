@@ -6,6 +6,20 @@ This document provides the visual and logical map of the exact sequence of opera
 
 ---
 
+## 📍 Request Routing (Do This First)
+
+When you receive a user message, classify it into **exactly one** of the following. Then perform the corresponding next action.
+
+| User message type | Condition | Next action |
+|-------------------|-----------|-------------|
+| **New project** | User says they want to "start", "init", "create" a new project or app | Go to `01_03_project_initialization_guide.md`; run Step 1 (CoT) then Step 2 (structure). Use `01_06_phase_checklists.md` Phase 1 checklist. |
+| **Approval** | Message contains any phrase from `APPROVAL_PHRASES` in `00_control_panel.md` and you have a DRAFT IP | Treat as approval; set `next_required_step`: "EXECUTE"; proceed to Execution phase (see Phase Checklists, Execution). |
+| **Edit IP** | User asks to change the current IP (e.g., different approach, more steps) | Do not execute; revise IP-XXX and re-output "Implementation Plan IP-XXX updated. Reply with [APPROVAL_PHRASES] to proceed." |
+| **New change** | User describes a feature, fix, or change (and it is not approval/edit) | Go to Phase 4; start at step 4.1 in `01_06_phase_checklists.md`. |
+| **Clarification / Block resolution** | User is replying to your BLOCKED message (Option A / B) | Re-read `00_control_panel.md` and `documentation/history/agent_state.json`; apply user's choice; unblock and continue from `next_required_step`. |
+
+---
+
 ## 🏗️ High-Level Process Flow (Mermaid)
 Review this architectural flowchart before beginning any project or processing any new change request.
 
@@ -94,11 +108,4 @@ Before drafting the Implementation plan, mentally trace the impact:
 ---
 
 ## 🔍 Self-Consistency Gate
-At the end of every workflow cycle (after code is implemented, but before notifying the user), you MUST perform a final consistency check.
-
-Run the following validation in your thoughts:
-1. **Completeness:** Did I create both a CR and an IP for this change?
-2. **Traceability:** Does my code execution perfectly match the steps outlined in the IP?
-3. **Documentation:** Did I update the relevant Registers (e.g., Tech Stack, NFRs) based on what I just coded?
-
-If any of these fail, you must fix the discrepancy before resolving the task.
+At the end of every workflow cycle (after code is implemented, but before notifying the user), you MUST run the **Done Criteria** checklist and output the `<self_validation>` block defined in **`04_10_done_criteria_and_validation.md`**. Do not notify the user until all items are Pass.
