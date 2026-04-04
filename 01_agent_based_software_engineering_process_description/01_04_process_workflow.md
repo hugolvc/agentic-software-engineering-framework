@@ -55,10 +55,36 @@ flowchart TD
 
 ---
 
-## 🛑 Explicit Tool Routing Matrix (Zero-Shot Guardrail)
-To prevent destructive actions and ensure architectural planning occurs *before* coding, you must strictly adhere to the following tool usage permissions per phase. 
+## 🛑 Capability routing matrix (orchestrators and agents)
+Orchestrators (Attractora, CI, IDE agents) should map **allowed capabilities** per workflow stage—not raw vendor tool names. Use the table below; forbidden capabilities must not run in that stage.
 
-**Attempting to use a Forbidden tool in a phase will result in immediate termination of the session.**
+| Workflow stage | read_docs | write_plan | edit_code | run_command | run_tests |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Stage 1: Project Initialization** | Required | Required | Forbidden | Restricted — only `mkdir` | Forbidden |
+| **Stage 2: CR Generation (Planning)** | Required | Required | Forbidden | Forbidden | Forbidden |
+| **Stage 2: IP Generation (Design)** | Required | Required | Forbidden | Forbidden | Forbidden |
+| **Stage 4: Execution (Implementation)** | Optional | Forbidden | Required | Required | Optional |
+| **QA & Validation** | Required | Forbidden* | Optional† | Required | Required |
+
+\* **write_plan** is allowed only when amending CR/IP or registers because QA exposed a documentation gap.  
+† **edit_code** is allowed only for minimal patches for defects found in QA (keep scope narrow).
+
+**Capability meanings:** **read_docs** — inspect repo and methodology. **write_plan** — author or update CR, IP, and register Markdown/JSON. **edit_code** — apply implementation diffs to product code. **run_command** — shell (build, install, scripts); **run_tests** — test/lint/typecheck commands (often via `run_command` in practice).
+
+---
+
+## 🔧 IDE tool name mapping (Cursor and similar)
+The matrix above is vendor-neutral. If your environment exposes **Cursor-style** tools, map capabilities to tools as follows (same logical rules as the table):
+
+| Capability | Typical tool names |
+| :--- | :--- |
+| read_docs | `view_file`, `find_by_name`, `grep_search`, `list_dir`, `search_web` |
+| write_plan | `write_to_file` for CR/IP and registers under `documentation/` |
+| edit_code | `multi_replace_file_content` |
+| run_command | `run_command`, `read_terminal` |
+| run_tests | `run_command` invoking the project’s test or lint entrypoints |
+
+**Attempting to use a Forbidden capability (or its mapped tools) in a stage will result in immediate termination of the session.**
 
 | Workflow stage | Required Tools | Optional Tools | Forbidden Tools |
 | :--- | :--- | :--- | :--- |

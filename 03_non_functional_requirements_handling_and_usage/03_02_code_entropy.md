@@ -5,8 +5,8 @@
 The highest risk you pose to a codebase is making disorganized, sprawling changes across too many files. Therefore, you are strictly governed by the rules of Entropy Management.
 
 **Definitions:**
-*   **Code Entropy:** The number of components/files that must be touched to implement a single Change Requirement. 
-    *(Example: Modifying 5 files to add one DB column = High Entropy. Modifying 1 file = Low Entropy).*
+*   **Code Entropy:** Same meaning as in `01_agent_based_software_engineering_process_description/01_01_justification.md`: count of **files** (paths) to create or change for **one** CR; “component” in older text is equivalent when it refers to one file or one bounded unit.  
+    *(Example: Modifying 5 files to add one DB column = High Entropy. Modifying 1 file = Low Entropy.)*
 *   **Cognitive Effort:** The complexity of the files you are touching (how hard they are to parse).
 
 **The Golden Constraint:**

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hugolvc/agentic-software-engineering-framework/schemas/implementation_plan.schema.json",
+  "title": "ASE Implementation Plan (machine-readable)",
+  "description": "Authoritative payload for tooling when paired with IP-XXX.md. See 01_02_process_description.md for the Markdown + JSON contract.",
+  "type": "object",
+  "required": [
+    "ip_id",
+    "parent_cr",
+    "a_ucp_score",
+    "files_to_modify",
+    "nfrs_addressed",
+    "status",
+    "worker_routing",
+    "created_at",
+    "markdown_path"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Version of this schema document (not the IP revision).",
+      "default": "1.0.0"
+    },
+    "ip_id": {
+      "type": "string",
+      "pattern": "^IP-[0-9]{3}$",
+      "description": "Implementation Plan identifier, e.g. IP-001."
+    },
+    "parent_cr": {
+      "type": "string",
+      "pattern": "^CR-[0-9]{3}$",
+      "description": "Change Requirement this plan implements."
+    },
+    "title": {
+      "type": "string",
+      "description": "Short human-readable title; mirrors the Markdown heading when present."
+    },
+    "a_ucp_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Agent Use Case Points total for this plan (see 05_01_software_sizing_description.md)."
+    },
+    "files_to_modify": {
+      "type": "array",
+      "description": "Repository-relative paths the plan is allowed to touch.",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "nfrs_addressed": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^NFR-[0-9]{3}$"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["DRAFT", "APPROVED", "REJECTED", "SUPERSEDED"]
+    },
+    "worker_routing": {
+      "type": "string",
+      "enum": ["worker", "orchestrator_only"],
+      "description": "worker: a single worker agent may execute this IP. orchestrator_only: must split into Sub-IPs and delegate (e.g. high A-UCP); see 05_01."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "markdown_path": {
+      "type": "string",
+      "description": "Path to the human-readable IP Markdown file, relative to the project repository root."
+    },
+    "json_path": {
+      "type": "string",
+      "description": "Path to this JSON file when stored on disk."
+    }
+  },
+  "additionalProperties": true
+}

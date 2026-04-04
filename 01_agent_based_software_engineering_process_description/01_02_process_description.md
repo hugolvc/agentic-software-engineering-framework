@@ -49,6 +49,14 @@ Every code modification you execute MUST consist of three mandatory, sequential 
 
 **Constraint:** All CRs and IPs must be retained under `documentation/changes/change_requirements/` and `documentation/changes/implementation_plans/` respectively. Never delete prior CR/IP files; you may mark them `Status: Superseded`. Use `documentation/history/` for traceability matrices, decision registers, `agent_state.json`, and other logs—not as the primary location for CR/IP documents.
 
+### Markdown and JSON: generation contract (tooling)
+When both `CR-XXX.md` / `IP-XXX.md` and their paired `CR-XXX.json` / `IP-XXX.json` exist:
+
+- **Markdown** is the human-readable narrative (review, diffing, discussion).
+- **JSON** is **authoritative for machines**: orchestrators, validators, CI, and worker routing MUST read fields (IDs, status, `files_to_modify`, `worker_routing`, paths, timestamps) from the JSON. Do not infer those fields only from Markdown headings.
+
+If Markdown and JSON disagree, **treat the JSON as the source of truth for tooling** and update the Markdown to match, or regenerate JSON from a single pipeline so they stay aligned. Full field definitions live in `schemas/change_requirement.schema.json` and `schemas/implementation_plan.schema.json`; example instances are under `examples/`.
+
 ---
 
 ## 🧠 Chain-of-Thought (CoT): The Change Request Process
@@ -85,7 +93,7 @@ Only after completing the two CoT blocks above may you draft the `Implementation
 Your generated IP must:
 1. Explicitly reference the guidelines identified in Phase 2.
 2. Specify the surgical code changes required.
-3. **Minimize Code Entropy** (as defined in `01_01_justification.md`). Limit changes strictly to the necessary components.
+3. **Minimize Code Entropy** (definition in `01_01_justification.md`; evaluation in `03_02_code_entropy.md`). Limit changes strictly to the necessary files.
 
 ---
 

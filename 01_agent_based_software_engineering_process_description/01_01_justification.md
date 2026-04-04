@@ -9,7 +9,7 @@ You are not a deterministic compiler. When asked to generate code, your output i
 ---
 
 ## 📉 Code Entropy Management (Zero-Shot Constraint)
-**Definition:** `Code Entropy` = The number of components that must be updated for a single change requirement.
+**Definition (canonical):** **Code Entropy** is the number of **files** (repository paths) that must be created or modified to implement **one** Change Requirement (CR). When the methodology says “component,” it means a file or another cohesive unit of change counted the same way—prefer counting **files** for Implementation Plans. Detailed evaluation patterns live in `03_non_functional_requirements_handling_and_usage/03_02_code_entropy.md`.
 
 **Rule:** You must minimize Code Entropy at all times. 
 High Code Entropy leads to:

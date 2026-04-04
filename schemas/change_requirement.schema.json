@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hugolvc/agentic-software-engineering-framework/schemas/change_requirement.schema.json",
+  "title": "ASE Change Requirement (machine-readable)",
+  "description": "Authoritative payload for tooling when paired with CR-XXX.md. See 01_02_process_description.md for the Markdown + JSON contract.",
+  "type": "object",
+  "required": [
+    "cr_id",
+    "title",
+    "classification",
+    "status",
+    "created_at",
+    "markdown_path"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Version of this schema document (not the CR revision).",
+      "default": "1.0.0"
+    },
+    "cr_id": {
+      "type": "string",
+      "pattern": "^CR-[0-9]{3}$",
+      "description": "Change Requirement identifier, e.g. CR-001."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "classification": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["Functional", "Non-Functional"]
+      },
+      "uniqueItems": true
+    },
+    "target_actors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^ACT-[0-9]{3}$"
+      }
+    },
+    "target_use_cases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^UC-[0-9]{3}$"
+      }
+    },
+    "target_functional_requirements": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^REQ-[0-9]{3}$"
+      }
+    },
+    "target_nfrs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^NFR-[0-9]{3}$"
+      }
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["Critical", "High", "Medium", "Low"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["DRAFT", "APPROVED", "REJECTED", "SUPERSEDED"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the CR JSON was authored or last materially updated."
+    },
+    "markdown_path": {
+      "type": "string",
+      "description": "Path to the human-readable CR Markdown file, relative to the project repository root.",
+      "examples": ["documentation/changes/change_requirements/CR-001_initial_implementation.md"]
+    },
+    "json_path": {
+      "type": "string",
+      "description": "Path to this JSON file if stored separately; often the same basename as markdown_path with .json extension."
+    }
+  },
+  "additionalProperties": true
+}

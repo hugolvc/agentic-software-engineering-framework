@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "cr_id": "CR-001",
+  "title": "Initial project implementation",
+  "classification": ["Functional"],
+  "target_actors": ["ACT-001"],
+  "target_use_cases": ["UC-001"],
+  "target_functional_requirements": ["REQ-001"],
+  "target_nfrs": ["NFR-001"],
+  "priority": "High",
+  "status": "DRAFT",
+  "created_at": "2026-04-04T12:00:00Z",
+  "markdown_path": "documentation/changes/change_requirements/CR-001_initial_implementation.md",
+  "json_path": "documentation/changes/change_requirements/CR-001_initial_implementation.json"
+}

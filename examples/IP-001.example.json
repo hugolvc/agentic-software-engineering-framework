@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "ip_id": "IP-001",
+  "parent_cr": "CR-001",
+  "title": "Initial implementation — foundation",
+  "a_ucp_score": 10,
+  "files_to_modify": ["src/main.ts", "documentation/requirements/actors_register.md"],
+  "nfrs_addressed": ["NFR-001"],
+  "status": "DRAFT",
+  "worker_routing": "worker",
+  "created_at": "2026-04-04T12:00:00Z",
+  "markdown_path": "documentation/changes/implementation_plans/IP-001_initial_implementation.md",
+  "json_path": "documentation/changes/implementation_plans/IP-001_initial_implementation.json"
+}

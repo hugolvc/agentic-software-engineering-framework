@@ -8,7 +8,8 @@ This Implementation Plan serves as the actual **Prompt Object** payload that wil
 1. **No Output Deviation:** Copy the Markdown structure below exactly. Do not invent new headers.
 2. **Strict Traceability:** You must link this Implementation Plan to a specific Change Request ID (CR-XXX).
 3. **Save location:** Write the completed document to `documentation/changes/implementation_plans/IP-XXX_[component_name].md` (see `01_05_project_documentation_structure.md`).
-4. **Entropy Calculation:** You must mathematically predict the Code Entropy (number of files touched) for this change and for future changes related to this component.
+4. **Paired JSON:** Also write `IP-XXX_[component_name].json` beside the Markdown file, validated against `schemas/implementation_plan.schema.json`. See `examples/IP-001.example.json` for a filled instance; **JSON is authoritative for tooling** when both exist (see `01_02_process_description.md`).
+5. **Entropy Calculation:** You must mathematically predict the Code Entropy (number of files touched) for this change and for future changes related to this component.
 
 ---
 
