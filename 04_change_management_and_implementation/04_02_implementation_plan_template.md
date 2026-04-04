@@ -7,7 +7,8 @@ This Implementation Plan serves as the actual **Prompt Object** payload that wil
 **Constraints:**
 1. **No Output Deviation:** Copy the Markdown structure below exactly. Do not invent new headers.
 2. **Strict Traceability:** You must link this Implementation Plan to a specific Change Request ID (CR-XXX).
-3. **Entropy Calculation:** You must mathematically predict the Code Entropy (number of files touched) for this change and for future changes related to this component.
+3. **Save location:** Write the completed document to `documentation/changes/implementation_plans/IP-XXX_[component_name].md` (see `01_05_project_documentation_structure.md`).
+4. **Entropy Calculation:** You must mathematically predict the Code Entropy (number of files touched) for this change and for future changes related to this component.
 
 ---
 
@@ -67,7 +68,7 @@ Copy from the line below to generate your Implementation Plan.
 **Compliance Strategy:**
 [How specifically will your code satisfy these mathematical thresholds?]
 
-## 6. Execution Steps
+## 7. Execution Steps
 *This is the exact sequence of `write_to_file` or `multi_replace_file_content` actions you will take once this plan is approved.*
 
 - [ ] Step 1: Create `path/to/new_file.ext` with boilerplate.
@@ -76,12 +77,12 @@ Copy from the line below to generate your Implementation Plan.
 - [ ] Step 4: [Further detailed steps...]
 - [ ] Step 5: Verify all new functions contain the mandatory Domain/Pattern docstrings (`03_03_coding_guidelines.md`) before finalizing execution.
 
-## 7. Verification Plan
+## 8. Verification Plan
 *How will you prove to the user that this works?*
 - **Terminal Commands:** [e.g., `npm run test`, `python -m pytest`]
 - **Visual Proof:** [e.g., Take a screenshot of the browser at `http://localhost:3000/new-route`]
 
-## 8. Framework Deviations & Technology Overrides
+## 9. Framework Deviations & Technology Overrides
 **Technology Paradigm Conflict:**
 [Explicitly declare any ASE Framework rules you are intentionally breaking because the mandated Technology Stack encourages the opposite (e.g., Utility-First CSS overriding UI styling metadata rules).]
 

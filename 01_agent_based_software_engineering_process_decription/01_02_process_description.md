@@ -16,7 +16,7 @@ Every code modification you execute MUST consist of three mandatory, sequential 
 ### 1. Change Requirement (CR)
 - **What it is:** A formal declaration of what needs to change.
 - **Your Role:** You must read or generate the CR based on the user's prompt. It must clearly state the business logic or technical objective.
-- **Artifact Generation (Dual-Format):** You must generate BOTH a human-readable `CR-XXX.md` and a machine-readable `CR-XXX.json` file.
+- **Artifact Generation (Dual-Format):** You must generate BOTH a human-readable `CR-XXX.md` and a machine-readable `CR-XXX.json` file. Store them under `documentation/changes/change_requirements/` using the same basename (e.g. `CR-004_oauth_login_integration.md` and `CR-004_oauth_login_integration.json`).
     - **JSON Schema:**
       ```json
       {
@@ -31,7 +31,7 @@ Every code modification you execute MUST consist of three mandatory, sequential 
 ### 2. Implementation Plan (IP)
 - **What it is:** The architectural blueprint.
 - **Your Role:** You must generate this document *before* writing any code. It details exactly which files will be modified and how they adhere to Non-Functional Requirements (NFRs).
-- **Artifact Generation (Dual-Format):** You must generate BOTH a human-readable `IP-XXX.md` and a machine-readable `IP-XXX.json` file.
+- **Artifact Generation (Dual-Format):** You must generate BOTH a human-readable `IP-XXX.md` and a machine-readable `IP-XXX.json` file. Store them under `documentation/changes/implementation_plans/` using the same basename.
     - **JSON Schema:**
       ```json
       {
@@ -47,7 +47,7 @@ Every code modification you execute MUST consist of three mandatory, sequential 
 - **What it is:** The actual file modifications.
 - **Your Role:** You execute the diffs. Your code must strictly match the architecture proposed in the IP.
 
-**Constraint:** All CRs and IPs must be retained in the `/documentation/history` folders. This creates the "Historical Context" memory bank you will use for future tasks.
+**Constraint:** All CRs and IPs must be retained under `documentation/changes/change_requirements/` and `documentation/changes/implementation_plans/` respectively. Never delete prior CR/IP files; you may mark them `Status: Superseded`. Use `documentation/history/` for traceability matrices, decision registers, `agent_state.json`, and other logs—not as the primary location for CR/IP documents.
 
 ---
 

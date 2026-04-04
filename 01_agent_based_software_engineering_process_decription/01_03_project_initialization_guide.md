@@ -38,10 +38,12 @@ project-root/
 ├── methodology/          # Sub-repository with methodology assets
 ├── documentation/        
 │   ├── input/            # Initial project inputs and overview
-│   ├── requirements/     # Actors, Use Cases, Functional Requirements
-│   ├── registers/        # Tech Stack, NFRs, UI Guidelines
-│   ├── changes/          # Change Requirements (CRs), Implementation Plans (IPs)
-│   └── history/          # Traceability, Context, Change History, Decisions
+│   ├── requirements/     # Flat registers: actors, use cases, functional requirements
+│   ├── registers/        # Tech Stack, NFRs, UI Guidelines (flat files under this folder)
+│   ├── changes/
+│   │   ├── change_requirements/
+│   │   └── implementation_plans/
+│   └── history/          # Traceability, agent_state.json, decisions, optional change_history
 └── [source code]/        # Project source code
 ```
 
@@ -71,7 +73,7 @@ Create a high-level summary.
 > **Stakeholders:** Farm Managers, Agronomists.
 > **Scope:** Mobile application with push notifications.
 
-### 3. Technology Stack Register (`documentation/registers/technology_stack/technology_stack_register.md`)
+### 3. Technology Stack Register (`documentation/registers/technology_stack_register.md`)
 Initialize using the template `03_06_technology_stack_register_description.md`.
 *Example Entry:*
 > **Component:** Database
@@ -81,10 +83,10 @@ Initialize using the template `03_06_technology_stack_register_description.md`.
 ### 4. Requirements Extraction (Actors, Use Cases, Functional Requirements)
 Extract requirements from the input and populate `documentation/requirements/...`.
 
-### 5. Initial Change Requirement (`CR-001_initial_implementation.md`)
+### 5. Initial Change Requirement (`documentation/changes/change_requirements/CR-001_initial_implementation.md`)
 Create the first Change Requirement scoping the initial build.
 
-### 6. Initial Implementation Plan (`IP-001_initial_implementation.md`)
+### 6. Initial Implementation Plan (`documentation/changes/implementation_plans/IP-001_initial_implementation.md`)
 Propose the architecture and component breakdown to fulfill CR-001.
 
 ---

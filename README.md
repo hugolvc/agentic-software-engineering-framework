@@ -72,6 +72,27 @@ Methodologies for estimating effort.
 
 ---
 
+## Canonical project documentation layout
+
+Every consuming project MUST use this single structure under `documentation/` (see **[Project Documentation Structure](01_agent_based_software_engineering_process_decription/01_05_project_documentation_structure.md)** for naming rules):
+
+```text
+project-root/
+├── methodology/                    # This ASE framework (submodule or copy)
+└── documentation/
+    ├── input/
+    ├── requirements/               # actors_register.md, use_cases_register.md, functional_requirements_register.md
+    ├── registers/                  # technology_stack_register.md, nfr_register.md (and other registers as needed)
+    ├── changes/
+    │   ├── change_requirements/      # CR-XXX_[name].md (+ optional CR-XXX.json)
+    │   └── implementation_plans/     # IP-XXX_[name].md (+ optional IP-XXX.json)
+    └── history/                      # traceability_matrix.md, decision_register.md, agent_state.json, etc.
+```
+
+Do not use alternate paths (e.g. nested `use_cases/` or `technology_stack/` folders) for these registers—agents and tooling rely on the paths above.
+
+---
+
 ## ⚙️ Standard Operating Procedure (CoT Loop)
 Whenever you receive a prompt or task from the user, you must adhere to the following execution loop:
 

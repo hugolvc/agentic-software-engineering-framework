@@ -8,7 +8,7 @@ If the user says "Add a dark mode button," you must first formalize this into a 
 **Constraints:**
 1. **CR ID Assignment:** Every new feature, bug fix, or request gets a sequential ID (e.g., CR-001, CR-002).
 2. **Mandatory Impact Assessment:** You cannot write a CR without explicitly listing which existing Functional (REQ-XXX) and Non-Functional (NFR-XXX) requirements are affected.
-3. **Save to Disk:** CRs must be saved in the `documentation/changes/` directory.
+3. **Save to Disk:** CRs must be saved in `documentation/changes/change_requirements/` using the filename pattern `CR-XXX_[descriptive_name].md` (see `01_05_project_documentation_structure.md`).
 
 ---
 

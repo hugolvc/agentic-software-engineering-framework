@@ -2,7 +2,9 @@
 
 ## 🤖 Core Operational Directives (Zero-Shot)
 **As an autonomous AI software engineer, you must conceptualize your execution cycle as a continuous, structured workflow.** 
-This document provides the visual and logical map of the exact sequence of operations you must follow. Do not deviate from this flowchart. Do not skip phases.
+This document provides the visual and logical map of the exact sequence of operations you must follow. Do not deviate from this flowchart. Do not skip stages.
+
+**Stage numbering:** **Stage 1** applies only when bootstrapping a **new** project. **Stage 2** applies when handling a **change** on an existing project. **Stages 3–5** are shared: draft Implementation Plan (IP), execute code, then update registers and traceability. Older drafts of this document referred to “Phase 4” for the change cycle; that is the same as **Stage 2** here—there are no missing “Phase 2” or “Phase 3” in the workflow.
 
 ---
 
@@ -26,19 +28,17 @@ Review this architectural flowchart before beginning any project or processing a
 ```mermaid
 flowchart TD
     A[START: User Prompt Received] --> B{Is this a New Project?}
-    B -- Yes --> C[PHASE 1: Project Initialization]
-    B -- No --> D[PHASE 4: Change Request Cycle]
+    B -- Yes --> C[Stage 1: Project Initialization]
+    B -- No --> D[Stage 2: Change Request Cycle]
 
-    %% Phase 1: Initialization
-    subgraph Phase 1: Project Initialization
+    subgraph S1["Stage 1: Project Initialization"]
     C --> C1[1. Repository Structure Setup]
     C1 --> C2[2. Initial Docs: Actors, Use Cases, NFRs]
     C2 --> C3[3. CR-001 Creation]
     end
     C3 --> E
 
-    %% Phase 4: Change Cycle
-    subgraph Phase 4: Change Request Cycle
+    subgraph S2["Stage 2: Change Request Cycle"]
     D --> D1[1. Analysis <thought_process>]
     D1 --> D2[2. Classification: Functional vs Non-Functional]
     D2 --> D3[3. Guideline Retrieval]
@@ -46,12 +46,11 @@ flowchart TD
     end
     D4 --> E
 
-    %% Execution
-    E[GENERATE IMPLEMENTATION PLAN IP-XXX] --> F[Execute Code Changes]
-    F --> G[Update Registers & Traceability]
+    E[Stage 3: GENERATE IMPLEMENTATION PLAN IP-XXX] --> F[Stage 4: Execute Code Changes]
+    F --> G[Stage 5: Update Registers and Traceability]
     G --> H{More Prompts?}
     H -- Yes --> D
-    H -- No --> I[End Taks & Notify User]
+    H -- No --> I[End Task and Notify User]
 ```
 
 ---
@@ -61,12 +60,12 @@ To prevent destructive actions and ensure architectural planning occurs *before*
 
 **Attempting to use a Forbidden tool in a phase will result in immediate termination of the session.**
 
-| Project Phase | Required Tools | Optional Tools | Forbidden Tools |
+| Workflow stage | Required Tools | Optional Tools | Forbidden Tools |
 | :--- | :--- | :--- | :--- |
-| **Phase 1: Project Initialization** | `write_to_file`, `list_dir` | `search_web` | `run_command` (except `mkdir`), `multi_replace_file_content` |
-| **Phase 4: CR Generation (Planning)** | `view_file`, `find_by_name`, `write_to_file` | `grep_search` | `run_command`, `multi_replace_file_content` |
-| **Phase 4: IP Generation (Design)** | `view_file`, `write_to_file` | `grep_search` | `run_command`, `multi_replace_file_content` |
-| **Execution (Implementation)** | `multi_replace_file_content`, `run_command`, `read_terminal` | `find_by_name`, `grep_search` | *None* |
+| **Stage 1: Project Initialization** | `write_to_file`, `list_dir` | `search_web` | `run_command` (except `mkdir`), `multi_replace_file_content` |
+| **Stage 2: CR Generation (Planning)** | `view_file`, `find_by_name`, `write_to_file` | `grep_search` | `run_command`, `multi_replace_file_content` |
+| **Stage 2: IP Generation (Design)** | `view_file`, `write_to_file` | `grep_search` | `run_command`, `multi_replace_file_content` |
+| **Stage 4: Execution (Implementation)** | `multi_replace_file_content`, `run_command`, `read_terminal` | `find_by_name`, `grep_search` | *None* |
 | **QA & Validation** | `run_command`, `view_file` | `search_web` | `write_to_file` (unless fixing a bug found in QA) |
 
 ---
@@ -75,7 +74,7 @@ To prevent destructive actions and ensure architectural planning occurs *before*
 
 When you are executing the workflow, you must follow these detailed sub-routines. 
 
-### Phase 1 & 2: Project Initialization & Initial Requirements 
+### Stage 1: Project Initialization & Initial Requirements 
 *(Reference: `01_03_project_initialization_guide.md`)*
 
 When initializing, you must sequentially generate documentation across all domains. You must not move to the Implementation Plan until all of the following are defined:
@@ -84,7 +83,7 @@ When initializing, you must sequentially generate documentation across all domai
 3. **Use Cases:** `02_03_use_cases_identification_description.md`
 4. **Software Sizing (A-UCP):** `05_01_software_sizing_description.md`
 
-### Phase 4: The Change Request Cycle
+### Stage 2: The Change Request Cycle
 *(Reference: `01_02_process_description.md`)*
 
 When a user requests a change to an existing project, you must trigger the following internal decision tree:

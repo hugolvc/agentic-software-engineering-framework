@@ -16,10 +16,12 @@ project-root/
 ├── methodology/                    # Sub-repository: You are reading from here
 ├── documentation/                  # Project Context: You read and write here
 │   ├── input/                      # Raw inputs provided by the user
-│   ├── requirements/               # Extracted Actors, Use Cases, Functional Reqs
+│   ├── requirements/               # Flat register files (Actors, Use Cases, Functional Reqs)
 │   ├── registers/                  # Tracked state (Tech Stack, NFRs, UI Styles)
-│   ├── changes/                    # Your generated CRs and IPs
-│   └── history/                    # Traceability matrices and chronological logs
+│   ├── changes/
+│   │   ├── change_requirements/    # CR-XXX_[descriptive_name].md
+│   │   └── implementation_plans/   # IP-XXX_[component_name].md
+│   └── history/                    # Traceability, decisions, agent state (not CR/IP storage)
 └── [source code]/                  # Your execution target
 ```
 
@@ -53,6 +55,8 @@ Whenever you execute a change, you must increment the ID sequentially from the h
 *   **Decision Register:** `documentation/history/decision_register.md`
     *   *ID Format:* `DEC-001`
 *   **Traceability Matrix:** `documentation/history/traceability_matrix.md`
+*   **Optional chronological log:** `documentation/history/change_history.md` (if the project maintains one)
+*   **Agent state (session anchor):** `documentation/history/agent_state.json`
 
 ---
 
@@ -74,5 +78,5 @@ Whenever you are tasked with creating a new document, execute this internal logi
 ## 🔍 Self-Consistency Gate: Traceability
 Before concluding any task that involves writing code or adding a new feature, you must perform a Traceability check.
 
-*   Did I map the new feature (`COMP-XXX`) back to its implementation plan (`IP-XXX`), its change requirement (`CR-XXX`), and the original functional requirement (`REQ-XXX`) in the `traceability_matrix.md`?
+*   Did I map each new or changed **source file or module** (paths listed in the **Target Components** column of `documentation/history/traceability_matrix.md`) back to its implementation plan (`IP-XXX`), change requirement (`CR-XXX`), and functional requirement (`REQ-XXX`) where applicable?
 *   If the answer is no, you must update the Traceability Matrix immediately.

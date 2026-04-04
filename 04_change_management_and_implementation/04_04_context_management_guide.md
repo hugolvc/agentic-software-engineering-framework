@@ -11,8 +11,8 @@ You are strictly prohibited from storing critical project decisions, API keys, o
 2. **Context First:** Before proposing a change to an existing module, you MUST read its corresponding documentation files to understand the original design intent.
 3. **Write-Through Context:** When you make a decision that deviates from the original plan, you MUST update the accompanying document. Do not leave the code and the documentation out of sync.
 4. **State Machine Integrity:** Before you do anything else, check `documentation/history/agent_state.json`. When you finish a step, you MUST update this JSON file. You must use this file as a persistent state anchor across sessions.
-5. **The Canary Summary (Context Refresh):** Over long execution sessions, AI context windows degrade. Every N tool calls (N = `CANARY_REFRESH_INTERVAL` from `00_control_panel.md`), or at the start of any Phase 4 Execution step, you MUST re-read the NFR register. You must explicitly output a `<canary_summary>` thought block verifying you still remember the constraints.
-6. **The Multitude of Workers (Orchestration):** If a task exceeds `A_UCP_ORCHESTRATOR_THRESHOLD` (from `00_control_panel.md`), you must act as an *Orchestrator* and delegate sub-tasks to specialized *Worker* agents using discrete Implementation Plans. You must not attempt monolithic generation.
+5. **The Canary Summary (Context Refresh):** Over long execution sessions, AI context windows degrade. Every N tool calls (N = `CANARY_REFRESH_INTERVAL` from `00_control_panel.md`), or at the start of any **Stage 4: Execution** step (`01_agent_based_software_engineering_process_description/01_04_process_workflow.md`), you MUST re-read `documentation/registers/nfr_register.md`. You must explicitly output a `<canary_summary>` thought block verifying you still remember the constraints.
+6. **The Multitude of Workers (Orchestration):** If a task’s total A-UCP exceeds `A_UCP_ORCHESTRATOR_THRESHOLD` (from `00_control_panel.md`; default 15 means **worker** only when total ≤ 15; **≥ 16** requires orchestration—see `05_software_sizing/05_01_software_sizing_description.md`), you must act as an *Orchestrator* and delegate sub-tasks to specialized *Worker* agents using discrete Implementation Plans. You must not attempt monolithic generation.
 7. **Formal HITL Escalation Protocol:** You must NEVER guess or hallucinate when faced with ambiguity. You must immediately halt execution, change your `agent_state.json` to `BLOCKED`, and notify the user if:
     *   You detect conflicting NFRs (e.g., required to use PostgreSQL but constrained to a NoSQL budget).
     *   A required Actor or Use Case is missing from the registers.
@@ -47,27 +47,27 @@ When starting a new task or resuming a session, you must execute this retrieval 
 ---
 
 ## 📂 Expected Context Architecture (Few-Shot Structure)
-You must enforce and navigate the following directory structure mapping context:
+You must enforce and navigate the following directory structure. It MUST match **`01_05_project_documentation_structure.md`** (flat register files under `requirements/` and `registers/`, CRs and IPs only under `changes/`).
 
 ```text
 documentation/
 ├── input/                    # Raw materials (User prompts, legacy code docs)
-├── requirements/             # WHAT the system does
-│   ├── actors/               # Who uses it (ACT-XXX)
-│   ├── use_cases/            # Workflows (UC-XXX)
-│   └── functional_requirements/ # Explicit features (REQ-XXX)
-├── registers/                # HOW the system is built
-│   ├── technology_stack/     # Authorized libraries (TECH-XXX)
-│   ├── non_functional_requirements/ # Math constraints (NFR-XXX)
-│   └── ui_styling_guidelines/ # Visual metadata
+├── requirements/             # WHAT the system does (flat register files)
+│   ├── actors_register.md    # ACT-XXX
+│   ├── use_cases_register.md # UC-XXX
+│   └── functional_requirements_register.md # REQ-XXX
+├── registers/                # HOW the system is built (flat register files)
+│   ├── technology_stack_register.md  # TECH-XXX
+│   └── nfr_register.md       # NFR-XXX
 ├── changes/                  # Change Management
-│   ├── change_requirements/  # The 'Why' (CR-XXX)
-│   └── implementation_plans/ # The 'How' (IP-XXX)
+│   ├── change_requirements/  # CR-XXX (Why)
+│   └── implementation_plans/ # IP-XXX (How)
 └── history/                  # Project memory
-    ├── agent_state.json      # Machine-readable current state of the AI agent
-    ├── project_context.md    # High-level overview
-    ├── change_history.md     # Chronological log
-    └── traceability_matrix.md# Dependency mapping
+    ├── agent_state.json
+    ├── project_context.md
+    ├── decision_register.md
+    ├── traceability_matrix.md
+    └── change_history.md     # Optional chronological log
 ```
 
 ## 🔍 Self-Consistency Gate

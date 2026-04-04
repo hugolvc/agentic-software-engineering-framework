@@ -11,13 +11,13 @@ For every single user prompt or automated request that requires modifying the co
 
 ```text
 <change_execution_loop>
-1. ASSESSMENT (Phase 1 & 2): 
+1. ASSESSMENT (impact and classification; see `01_02_process_description.md`):
    - Does this change impact existing Actors, Use Cases, or Functional Requirements? (See Module 02).
    - Does this change impact the Tech Stack, UI Guidelines, or Non-Functional Requirements? (See Module 03).
-2. PLANNING (Phase 4):
-   - Have I written a formal Implementation Plan (IP-XXX)?
+2. PLANNING (Stage 2 — CR and IP per `01_05_project_documentation_structure.md`):
+   - Have I written a formal Change Requirement (CR-XXX) and Implementation Plan (IP-XXX)?
    - Has the user explicitly approved the Implementation Plan? (If no, wait for approval).
-3. EXECUTION:
+3. EXECUTION (Stage 4 in `01_04_process_workflow.md`):
    - Now I can write the code. I must follow the exact steps outlined in the approved Implementation Plan.
 4. VALIDATION:
    - Have I run tests and verified that the change satisfies both the Functional and Non-Functional Requirements?

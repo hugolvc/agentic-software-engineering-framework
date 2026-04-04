@@ -37,7 +37,7 @@ When drafting an Implementation Plan (`IP-XXX`), execute this thought process to
 
 ## 📊 Complexity Classification Table (Few-Shot)
 
-When updating the Use Case Register (`documentation/requirements/use_cases/use_cases_register.md`), you must append the UCP weight to each row based on this matrix:
+When updating the Use Case Register (`documentation/requirements/use_cases_register.md`), you must append the UCP weight to each row based on this matrix:
 
 | Classification | Triggers (If ANY match) | Weight (A-UCP) |
 | :--- | :--- | :--- |
